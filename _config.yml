@@ -2,5 +2,12 @@
 title: Spiritinlife book of codes
 email: george.chailazopoulos@gmail.com
 description: "This site is intended to be used as a personal blog"
-markdown: rdiscount
+baseurl: ""
+url: ""
+markdown: redcarpet
 pygments: true
+permalink: pretty
+
+safe: true
+lsi: false
+source: ""
