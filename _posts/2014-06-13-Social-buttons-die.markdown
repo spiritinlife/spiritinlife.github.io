@@ -2,7 +2,7 @@
 layout: post
 title:  "Social-buttons die.."
 date:   2014-06-13 17:52:57
-categories: Android
+categories: Hacks
 ---
 This is a small hack i figured when trying to get pass through annoying social buttons to watch a video.
 It is specific for this site http://mantarinaki.com .
@@ -36,8 +36,11 @@ var box = jQuery(".sharing");
 So what now ?
 
 Well it is simple , follow these steps (easy for non programmers also)
-1)press ctrl + shift + i (which opens developers tools)
+
+1)press ctrl + shift + i (which opens developers tools) 
+
 2)you will see a console ,at the bottoms you can type your stuff (non-developers type  : alert("Hello there!") ,and press enter  )
+
 3)There you will have to type copy-paste these :
 
 {% highlight javascript %}
