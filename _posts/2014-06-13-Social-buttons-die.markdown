@@ -5,7 +5,7 @@ date:   2014-06-13 17:52:57
 categories: Hacks
 ---
 This is a small hack i figured when trying to get pass through annoying social buttons to watch a video.
-It is specific for this site http://mantarinaki.com .
+It is specific for these sites http://flogit.gr,http://mantarinaki.com .(It probably works for many other also but i am not yet sure).
 If i a find time i will try to make it more general.
 
 For now what i did is i located the code that unblocks the video.
@@ -37,11 +37,13 @@ So what now ?
 
 Well it is simple , follow these steps (easy for non programmers also)
 
-1)press ctrl + shift + i (which opens developers tools) 
+1)You need to first click on the video so that the site prompts you to share , like or whatever the video.
 
-2)you will see a console ,at the bottoms you can type your stuff (non-developers type  : alert("Hello there!") ,and press enter  )
+2)Press ctrl + shift + i (which opens developers tools) 
 
-3)There you will have to type copy-paste these :
+3)You will see a console ,at the bottoms you can type your stuff (non-developers type  : alert("Hello there!") ,and press enter  )
+
+4)There you will have to type copy-paste these :
 
 {% highlight javascript %}
 var box = jQuery(".sharing");
