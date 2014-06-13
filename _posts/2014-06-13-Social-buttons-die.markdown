@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Social-buttons die.."
-date:   2014-06-02 19:28:57
+date:   2014-06-13 17:52:57
 categories: Android
 ---
 This is a small hack i figured when trying to get pass through annoying social buttons to watch a video.
