@@ -5,7 +5,7 @@ date:   2014-06-13 17:52:57
 categories: Hacks
 ---
 This is a small hack i figured when trying to get pass through annoying social buttons to watch a video.
-It is specific for these sites http://flogit.gr,http://mantarinaki.com .(It probably works for many other also but i am not yet sure).
+It is specific for these sites http://flogit.gr,http://mantarinaki.com .(It probably works for many other also but i am not  sure yet).
 If i a find time i will try to make it more general.
 
 For now what i did is i located the code that unblocks the video.
@@ -41,7 +41,7 @@ Well it is simple , follow these steps (easy for non programmers also)
 
 2)Press ctrl + shift + i (which opens developers tools) 
 
-3)You will see a console ,at the bottoms you can type your stuff (non-developers type  : alert("Hello there!") ,and press enter  )
+3)You will see a console ,at the bottom where  you can type your stuff (non-developers type  : alert("Hello there!") ,and press enter -> if you see a box appearing you are at the right spot , close the box and continue with step 4 )
 
 4)There you will have to type copy-paste these :
 
