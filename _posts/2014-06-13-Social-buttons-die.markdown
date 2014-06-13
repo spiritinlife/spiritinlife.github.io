@@ -18,8 +18,7 @@ var width = box.width();
 var height = box.height();
 box.find('> div').not('.video').fadeOut('slow');
 jQuery("#"+flashid)
-	.html('<iframe width="'+width+'" height="'+height+'" src="//www.youtube.com/embed/'+videoid+'" frameborder="0" allowfullscreen></iframe>');
-
+.html('<iframe width="'+width+'" height="'+height+'" src="//www.youtube.com/embed/'+videoid+'" frameborder="0" allowfullscreen></iframe>');
 {% endhighlight %}
 
 
@@ -49,7 +48,7 @@ var width = box.width();
 var height = box.height();
 box.find('> div').not('.video').fadeOut('slow');
 jQuery("#"+flashid)
-	.html('<iframe width="'+width+'" height="'+height+'" src="//www.youtube.com/embed/'+videoid+'" frameborder="0" allowfullscreen></iframe>');
+.html('<iframe width="'+width+'" height="'+height+'" src="//www.youtube.com/embed/'+videoid+'" frameborder="0" allowfullscreen></iframe>');
 {% endhighlight %}
 
 Now press enter and enjoy your video !
