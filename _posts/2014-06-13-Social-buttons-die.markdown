@@ -1,11 +1,11 @@
 ---
 layout: post
 title:  "Social-buttons die.."
-date:   2014-06-02 19:28:57
-categories: Android
+date:   2014-06-13 17:52:57
+categories: Hacks
 ---
 This is a small hack i figured when trying to get pass through annoying social buttons to watch a video.
-It is specific for this site http://mantarinaki.com .
+It is specific for these sites http://flogit.gr,http://mantarinaki.com .(It probably works for many other also but i am not  sure yet).
 If i a find time i will try to make it more general.
 
 For now what i did is i located the code that unblocks the video.
@@ -18,8 +18,7 @@ var width = box.width();
 var height = box.height();
 box.find('> div').not('.video').fadeOut('slow');
 jQuery("#"+flashid)
-	.html('<iframe width="'+width+'" height="'+height+'" src="//www.youtube.com/embed/'+videoid+'" frameborder="0" allowfullscreen></iframe>');
-
+.html('<iframe width="'+width+'" height="'+height+'" src="//www.youtube.com/embed/'+videoid+'" frameborder="0" allowfullscreen></iframe>');
 {% endhighlight %}
 
 
@@ -37,9 +36,14 @@ var box = jQuery(".sharing");
 So what now ?
 
 Well it is simple , follow these steps (easy for non programmers also)
-1)press ctrl + shift + i (which opens developers tools)
-2)you will see a console ,at the bottoms you can type your stuff (non-developers type  : alert("Hello there!") ,and press enter  )
-3)There you will have to type copy-paste these :
+
+1)You need to first click on the video so that the site prompts you to share , like or whatever the video.
+
+2)Press ctrl + shift + i (which opens developers tools) 
+
+3)You will see a console ,at the bottom where  you can type your stuff (non-developers type  : alert("Hello there!") ,and press enter -> if you see a box appearing you are at the right spot , close the box and continue with step 4 )
+
+4)There you will have to type copy-paste these :
 
 {% highlight javascript %}
 var box = jQuery(".sharing");
@@ -49,7 +53,7 @@ var width = box.width();
 var height = box.height();
 box.find('> div').not('.video').fadeOut('slow');
 jQuery("#"+flashid)
-	.html('<iframe width="'+width+'" height="'+height+'" src="//www.youtube.com/embed/'+videoid+'" frameborder="0" allowfullscreen></iframe>');
+.html('<iframe width="'+width+'" height="'+height+'" src="//www.youtube.com/embed/'+videoid+'" frameborder="0" allowfullscreen></iframe>');
 {% endhighlight %}
 
 Now press enter and enjoy your video !
