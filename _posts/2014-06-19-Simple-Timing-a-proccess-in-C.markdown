@@ -76,7 +76,7 @@ void elapsedTimeCPU(TimeAProccess *this) {
 	printf("Time taken for this proccess to execute %ds:%dms\n", msec / 1000, msec % 1000);
 }
 
-void startTimedProccess(void(*funcProccess)(int*, int), int* array, int arraySize, char *cAlgo){
+void startTimedProccess(void(*funcProccess)(int*, int), int* array, int arraySize){
 	TimeAProccess pSortTime;   //create the struct that holds our data
 	printf("Proccess starts..\n");
 	startTime(&pSortTime);     //initialize start time
