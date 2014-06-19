@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Simple timing a proccess in c."
+title:  "Simple timing a proccess in C."
 date:   2014-06-19 04:30:00
 categories: c
 ---
