@@ -9,13 +9,14 @@ categories: c
 The code below showcases:
 
 1) Pointers to functions in c
+
 2) Timing a proccess. It uses time.h.
 
 The code bellow is not fully tested and it can be improven.
 Furthermore it would be nice to have an OOP like style  and i am planning to add that in the future.
 
 Some notes about time.h ,clock_t and clock().
-As stated here .
+As stated here http://www.cplusplus.com/reference/ctime/clock/.
 clock() returns the processor time consumed by the program.
 The value returned is expressed in clock ticks, which are units of time of a constant but system-specific length (with a relation of CLOCKS_PER_SEC clock ticks per second).
 
