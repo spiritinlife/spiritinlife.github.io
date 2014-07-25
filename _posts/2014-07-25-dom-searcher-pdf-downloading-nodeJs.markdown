@@ -15,11 +15,11 @@ Well in the end it took me more time to code this than just download them one by
 Update:
 	I dont think i passed the exam :/
 
-Ok i do not have time to explain what i did exactly , i took some time though and reorganized the code and wrote some comments, but it is still a little bit out of style.
+Unfortunately i do not have time to explain what i did exactly , i took some time though and reorganized the code and wrote some comments, but it is still a little bit out of style.
 
-So i start by creating a simple http server(localhost:8080) with two routes , one prompts the user to give the url that has the pdfs that you want to download and the other  retrieves the url from the headers and starts the downloading process
-Furthemore i wanted to play with the eventemiter so the downloadPdf inherits from EventEmit and emits the 'end' event so that the recursiveDownload function can start the downloading process of the next pdf link.
-(You will notice that i download the pdfs one by one in a recursive like style .I did that because i wanted to try some recursion and the emit event.It could have been faster and better if i did those in 'parallel').
+So i start by creating a simple http server(localhost:8080) with two routes , one has js script that prompts the user to give the url that has the pdfs that he wants to download and the other  retrieves the url from the headers and starts the downloading process
+Furthemore i wanted to play with the eventemitter so the downloadPdf function inherits from EventEmitter and emits the 'end' event when it finishes downloading a pdf so that the recursiveDownload function can start the downloading process of the next pdf link.
+(You will notice that i download the pdfs one by one in a recursive like style .I did that because i wanted to try some recursion and the emit event.It could have been faster and better if i did those(the downloading) to run in 'parallel').
 Ok so here is the whole code.
 
 {% highlight javascript %}
@@ -95,7 +95,7 @@ var main = function(urlToSearch){
 	}
 
 	function recursiveDownload(i,links){
-			//exit recursion when i >= links 
+	//exit recursion when i >= links 
       if(i<links.length){
 				this.counter = i;
 				var that = this;
