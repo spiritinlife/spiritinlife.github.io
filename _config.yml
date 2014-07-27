@@ -1,13 +1,25 @@
-# Site settings
-title: Spiritinlife's book of codes
-email: george.chailazopoulos@gmail.com
-description: "This site is intended to be used as a personal blog"
-baseurl: ""
-url: ""
-markdown: redcarpet
-pygments: true
-permalink: pretty
+# Dependencies
+markdown:         redcarpet
+pygments:         true
 
-safe: true
-lsi: false
-source: ""
+# Permalinks
+permalink:        pretty
+
+# Setup
+title:            Spiritinlife's book of codes
+tagline:          ''
+description:      'This is a personal blog about my coding adventures'
+url:              http://spiritinlife.github.io/
+baseurl:          /
+
+author:
+  name:           'George Chailazopoulos'
+  url:            https://twitter.com/_spiritinlife
+
+paginate:         5
+
+# Custom vars
+version:          2.1.0
+
+github:
+  repo:           https://github.com/spiritinlife/spiritinlife.github.io
