@@ -25,6 +25,11 @@
  */
 
 
+/* Remove Disqus powered */
+.dsq-brlink {
+  visibility: none;
+}
+
 /*
  * Global resets
  *

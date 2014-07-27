@@ -6,8 +6,8 @@ pygments:         true
 permalink:        pretty
 
 # Setup
-title:            Spiritinlife's book of codes
-tagline:          ''
+title:            Spiritinlife
+tagline:          'book of codes'
 description:      'This is a personal blog about my coding adventures'
 url:              http://spiritinlife.github.io/
 baseurl:          /

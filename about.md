@@ -1,6 +1,7 @@
 ---
 layout: page
 title: About
+comments: False
 ---
 
 I am George Chailazopoulos 21 years old.
