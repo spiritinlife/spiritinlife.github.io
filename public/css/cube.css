@@ -3,6 +3,7 @@
   height: 200px;
   position: relative;
   perspective: 1000px;
+  margin-bottom:5px;
 }
 
 #cube {
@@ -21,6 +22,8 @@
   display: block;
   position: absolute;
   border: 2px solid black;
+  background-size: 180px 180px;
+  background-repeat: no-repeat;
 }
 
 
