@@ -3,7 +3,6 @@ layout: post
 title:  "Custom Android Animation for illusion of filling something or progressing"
 date:   2014-06-02 19:28:57
 categories: Android
-comments: False
 ---
 The concept of this Animation is to make an illusion of something getting filled or progressed.In this example i use two images,
 one is a black box and the other is a red one.The goal is to reveal the red box my animating the
