@@ -70,7 +70,7 @@ html {
     top: 0;
     left: 0;
     bottom: 0;
-    width: 18rem;
+    width: 20rem;
     text-align: left;
   }
 }
@@ -85,7 +85,7 @@ html {
   color: #fff;
   margin-top: 0;
   font-family: "Abril Fatface", serif;
-  font-size: 3.25rem;
+  font-size: 3rem;
 }
 
 /* Sidebar nav */
@@ -112,9 +112,9 @@ a.sidebar-nav-item:focus {
 @media (min-width: 48em) {
   .sidebar-sticky {
     position: absolute;
-    right:  1rem;
+    right:  0.5rem;
     bottom: 1rem;
-    left:   1rem;
+    left:   0.5rem;
   }
 }
 
