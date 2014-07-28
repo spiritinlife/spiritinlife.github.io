@@ -155,4 +155,3 @@ utils.inherits(downloadPdf,EventEmitter);
 
 {% endhighlight %}
 
-{% include comments.html %}

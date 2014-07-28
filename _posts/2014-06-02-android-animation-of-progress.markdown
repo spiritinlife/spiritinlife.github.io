@@ -78,4 +78,3 @@ invalidate(); // invalidate calls onDraw()
 
 Now you can use this view inside your layout and it works!
 
-{% include comments.html %}

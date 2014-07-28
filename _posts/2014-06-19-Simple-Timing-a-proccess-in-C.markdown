@@ -128,7 +128,6 @@ return 0;
 }
 {% endhighlight %}
 
-{% include comments.html %}
 
 
 

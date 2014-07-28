@@ -58,4 +58,3 @@ jQuery("#"+flashid)
 
 Now press enter and enjoy your video !
 
-{% include comments.html %}
