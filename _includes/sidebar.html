@@ -1,7 +1,10 @@
 <div class="sidebar">
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
-      <img id="mypicture" src="/images/GeorgeMouri.png"  width=200 height=200 />
+      
+      <a href="{{ site.baseurl }}">
+          <img id="mypicture" src="/images/GeorgeMouri.png"  width=200 height=200 />
+      </a>
       <h1>
         <a href="{{ site.baseurl }}">
           {{ site.title }}
@@ -27,7 +30,7 @@
         {% endif %}
       {% endfor %}
 
-      <a class="sidebar-nav-item" href="{{ site.github.repo }}/atom.xml">Feed</a>
+      <a class="sidebar-nav-item" href="{{ site.baseurl }}/atom.xml">Feed</a>
 
     </nav>
 
