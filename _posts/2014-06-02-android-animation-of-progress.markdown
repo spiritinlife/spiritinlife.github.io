@@ -77,3 +77,5 @@ invalidate(); // invalidate calls onDraw()
 {% endhighlight %}
 
 Now you can use this view inside your layout and it works!
+
+{% include comments.html %}
