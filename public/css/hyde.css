@@ -30,6 +30,11 @@
   visibility: none;
 }
 
+#mypicture {
+  -webkit-box-shadow: 66px 68px 16px -12px rgba(0,0,0,0.76);
+  -moz-box-shadow: 66px 68px 16px -12px rgba(0,0,0,0.76);
+  box-shadow: 66px 68px 16px -12px rgba(0,0,0,0.76);
+}
 /*
  * Global resets
  *
