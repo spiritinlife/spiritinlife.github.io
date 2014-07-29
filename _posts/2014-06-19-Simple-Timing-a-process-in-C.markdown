@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Simple timing a proccess in C."
+title:  "Simple timing a process in C."
 date:   2014-06-19 04:30:00
 categories: c
 ---
@@ -10,7 +10,7 @@ The code below showcases:
 
 1) Pointers to functions in c
 
-2) Timing a proccess. It uses time.h.
+2) Timing a process. It uses time.h.
 
 The code bellow is not fully tested and it can be improven.
 Furthermore it would be nice to have an OOP like style  and i am planning to add that in the future.
@@ -28,8 +28,8 @@ The function that does the sorting takes an array and the array size.
 {% highlight c %}
 #include <time.h>
 #include <stdio.h>
-//This struct will hold the start and end time of a proccess
-//We will use this info to Calculate the amount of seconds the proccess consumed
+//This struct will hold the start and end time of a process
+//We will use this info to Calculate the amount of seconds the process consumed
 typedef struct TimeAProccess
 {
   clock_t start;
