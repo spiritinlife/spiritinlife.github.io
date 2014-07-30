@@ -12,7 +12,7 @@ categories: University(algorithms)
 
 Και αυτη ειναι η λυση μου.
 
-<img src="/images/sxolh_algortihms_mcs_1.jpg">
+<img src="/images/sxolh_algorithms_mcs_1.jpg">
 
-<img src="/images/sxolh_algortihms_mcs_2.jpg">
+<img src="/images/sxolh_algorithms_mcs_2.jpg">
 
