@@ -2,7 +2,7 @@
 layout: post
 title:  "Selection algorithm, example from July exams"
 date:   2014-07-30 1:00:00
-categories: Sxolh,algorithms
+categories: University(algorithms)
 ---
 
 
