@@ -12,8 +12,8 @@ categories: Sxolh,algorithms
 
 Και αυτη ειναι η λυση μου.
 
-<img src="../images/sxolh_algorithms_selection_1">
+<img src="../images/sxolh_algorithms_selection_1.jpg">
 
-<img src="../images/sxolh_algorithms_selection_2">
+<img src="../images/sxolh_algorithms_selection_2.jpg">
 
-<img src="../images/sxolh_algorithms_selection_3">
+<img src="../images/sxolh_algorithms_selection_3.jpg">
