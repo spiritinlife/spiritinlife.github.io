@@ -8,12 +8,12 @@ categories: University(algorithms)
 
 Το ερωτημα ειναι απο την εξεταστικη στου αλγοριθμους και την πολυπλοκοτητα.
 
-<img src="../images/sxolh_algorithms_selection_question.png">
+<img src="/images/sxolh_algorithms_selection_question.png">
 
 Και αυτη ειναι η λυση μου.
 
-<img src="../images/sxolh_algortihms_selection_1.jpg">
+<img src="/images/sxolh_algortihms_selection_1.jpg">
 
-<img src="../images/sxolh_algortihms_selection_2.jpg">
+<img src="/images/sxolh_algortihms_selection_2.jpg">
 
-<img src="../images/sxolh_algortihms_selection_3.jpg">
+<img src="/images/sxolh_algortihms_selection_3.jpg">
