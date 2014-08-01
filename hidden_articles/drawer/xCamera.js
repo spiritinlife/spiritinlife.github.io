@@ -216,9 +216,9 @@ window.requestAnimFrame = (function(){
     this.image = new Image();
     this.image.src = "drawer.png";
 
-    canvas.addEventListener("touchstart", touchStart, false);
-    canvas.addEventListener("touchend", touchEnd, false);
-    canvas.addEventListener("touchmove", touchX, false);
+    this.canvas.addEventListener("touchstart", touchStart, false);
+    this.canvas.addEventListener("touchend", touchEnd, false);
+    this.canvas.addEventListener("touchmove", touchX, false);
 
 
     this.touch_x = 0;
@@ -253,7 +253,7 @@ window.requestAnimFrame = (function(){
   }
   
   DrawerWorld.prototype.touchX = function(e){
-    this.dist_touch_x += this.touch_x - event.changedTouches[0].clientX;
+    this.dist_touch_x += this.touch_x - e.changedTouches[0].clientX;
   }
 
   DrawerWorld.prototype.draw = function(context,camera){
