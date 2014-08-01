@@ -137,6 +137,17 @@ window.requestAnimFrame = (function(){
     }
 
 
+    if (Drawer.controls.touch > 0)
+    {
+      this.xView += this.cameraSpeed  * Drawer.STEP;
+      Drawer.controls.touch = 0;
+    }
+
+    if (Drawer.controls.touch < 0)
+    {
+      this.xView -= this.cameraSpeed  * Drawer.STEP;
+      Drawer.controls.touch = 0;
+    }
 
     //set the new position of the camera
     this.viewport.set(this.xView,this.yView);
@@ -205,8 +216,13 @@ window.requestAnimFrame = (function(){
     this.image = new Image();
     this.image.src = "drawer.png";
 
-    this.canvas.addEventListener("touchmove", this.touchX, true);
-    this.canvas.addEventListener("touchend", this.touchEnd, true);
+    canvas.addEventListener("touchstart", touchStart, false);
+    canvas.addEventListener("touchend", touchEnd, false);
+    canvas.addEventListener("touchmove", touchX, false);
+
+
+    this.touch_x = 0;
+    this.dist_touch_x = 0;
 
     this.images = ["shirt.jpg"];
     for (var i = 100; i >= 0; i--) {
@@ -217,25 +233,29 @@ window.requestAnimFrame = (function(){
 
   }
 
-  DrawerWorld.prototype.touchEnd = function(){
-      Drawer.controls.left = false;
-      Drawer.controls.right = false;
+
+  DrawerWorld.prototype.touchStart = function(e){
+      this.touch_x = e.changedTouches[0].clientX;
+      this.dist_touch_x = 0;
     
   }
   
-  DrawerWorld.prototype.touchX = function(e){
-    if (!e)
-      var e = event;
-    
-    var tx = e.pageX - this.canvas.offsetLeft;
-    alert(tx);
-    if(tx<0){
-      Drawer.controls.left = true;
-    }
-    else{
-      Drawer.controls.right = true;
-    }
+  DrawerWorld.prototype.touchEnd = function(e){
+      var end_touch = e.changedTouches[0].clientX; 
+     // if(end_touch >= this.touch_x)  //swiped to the right
+      //{
+     //   Drawer.controls.touch = end_touch - this.touch_x;
+     // }
+     // else //swiped to left
+     // {
+        Drawer.controls.touch = end_touch - this.touch_x;
+     // }
   }
+  
+  DrawerWorld.prototype.touchX = function(e){
+    this.dist_touch_x += this.touch_x - event.changedTouches[0].clientX;
+  }
+
   DrawerWorld.prototype.draw = function(context,camera){
 
       //We draw the Drawer Image all over the camera viewport
