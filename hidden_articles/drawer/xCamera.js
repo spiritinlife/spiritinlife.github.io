@@ -257,7 +257,7 @@ window.requestAnimFrame = (function(){
      // }
      // else //swiped to left
      // {
-        Drawer.controls.touch = (end_touch - this.touch_x)/window.innerWidth;
+        Drawer.controls.touch = window.innerWidth/(end_touch - this.touch_x);
         /*if ( Drawer.controls.touch > 150  ){
           Drawer.controls.touch = 150;
         }
