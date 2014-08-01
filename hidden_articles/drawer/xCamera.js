@@ -119,6 +119,7 @@ window.requestAnimFrame = (function(){
     //Note this.worldHeight should be the same as  viewportHeight for this example
 
     this.cameraSpeed = 200;
+    this.touchSpeed = 1000;
   }
 
 
@@ -139,13 +140,13 @@ window.requestAnimFrame = (function(){
 
     if (Drawer.controls.touch > 0)
     {
-      this.xView += this.cameraSpeed  * Drawer.STEP;
+      this.xView -= this.touchSpeed  * Drawer.STEP;
       Drawer.controls.touch = 0;
     }
 
     if (Drawer.controls.touch < 0)
     {
-      this.xView -= this.cameraSpeed  * Drawer.STEP;
+      this.xView += this.touchSpeed  * Drawer.STEP;
       Drawer.controls.touch = 0;
     }
 
