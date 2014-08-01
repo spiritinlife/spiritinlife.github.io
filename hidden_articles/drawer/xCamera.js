@@ -257,14 +257,14 @@ window.requestAnimFrame = (function(){
      // }
      // else //swiped to left
      // {
-        Drawer.controls.touch = end_touch - this.touch_x;
-        if ( Drawer.controls.touch > 50  ){
-          Drawer.controls.touch = 50;
+        Drawer.controls.touch = (end_touch - this.touch_x)/window.innerWidth;
+        /*if ( Drawer.controls.touch > 150  ){
+          Drawer.controls.touch = 150;
         }
         
-        if ( Drawer.controls.touch < -50  ){
-          Drawer.controls.touch = -50;
-        }
+        if ( Drawer.controls.touch < -150  ){
+          Drawer.controls.touch = -150;
+        }*/
 
      // }
   }
