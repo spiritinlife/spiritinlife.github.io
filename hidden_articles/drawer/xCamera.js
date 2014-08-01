@@ -223,7 +223,7 @@ window.requestAnimFrame = (function(){
     
   }
   
-  DrawerWorld.prototype.touhX = function(e){
+  DrawerWorld.prototype.touchX = function(e){
     if (!e)
       var e = event;
     
