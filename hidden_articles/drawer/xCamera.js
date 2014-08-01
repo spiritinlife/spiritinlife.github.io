@@ -205,6 +205,9 @@ window.requestAnimFrame = (function(){
     this.image = new Image();
     this.image.src = "drawer.png";
 
+    this.canvas.addEventListener("touchmove", this.touchX, true);
+    this.canvas.addEventListener("touchend", this.touchEnd, true);
+
     this.images = ["shirt.jpg"];
     for (var i = 100; i >= 0; i--) {
 
@@ -214,6 +217,24 @@ window.requestAnimFrame = (function(){
 
   }
 
+  DrawerWorld.prototype.touchEnd = function(){
+      Drawer.controls.left = false;
+      Drawer.controls.right = false;
+    
+  }
+  
+  DrawerWorld.prototype.touhX = function(e){
+    if (!e)
+      var e = event;
+    
+    var tx = e.pageX - this.canvas.offsetLeft;
+    if(tx<0){
+      Drawer.controls.left = true;
+    }
+    else{
+      Drawer.controls.right = true;
+    }
+  }
   DrawerWorld.prototype.draw = function(context,camera){
 
       //We draw the Drawer Image all over the camera viewport
