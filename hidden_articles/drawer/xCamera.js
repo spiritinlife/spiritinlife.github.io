@@ -151,7 +151,7 @@ window.requestAnimFrame = (function(){
 
     if (Drawer.controls.touch < 0)
     {
-      this.xView += Drawer.controls.touch  * Drawer.STEP;
+      this.xView -= Drawer.controls.touch  * Drawer.STEP;
       Drawer.controls.touch += 1;
       if (Drawer.controls.touch > 0 ){
           Drawer.controls.touch = 0;
@@ -259,12 +259,10 @@ window.requestAnimFrame = (function(){
      // {
         Drawer.controls.touch = end_touch - this.touch_x;
         if ( Drawer.controls.touch > 150  ){
-          alert("thetiko");
           Drawer.controls.touch = 150;
         }
         
         if ( Drawer.controls.touch < -150  ){
-          alert("arnhtiko");
           Drawer.controls.touch = -150;
         }
 
