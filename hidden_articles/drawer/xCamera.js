@@ -119,7 +119,7 @@ window.requestAnimFrame = (function(){
     //Note this.worldHeight should be the same as  viewportHeight for this example
 
     this.cameraSpeed = 200;
-    this.touchSpeed = 1000;
+    this.touchSpeed = 300;
   }
 
 
@@ -141,13 +141,19 @@ window.requestAnimFrame = (function(){
     if (Drawer.controls.touch > 0)
     {
       this.xView -= this.touchSpeed  * Drawer.STEP;
-      Drawer.controls.touch = 0;
+      Drawer.controls.touch -= 1;
+      if (Drawer.controls.touch < 0 ){
+        Drawer.controls.touch = 0;
+      }
     }
 
     if (Drawer.controls.touch < 0)
     {
       this.xView += this.touchSpeed  * Drawer.STEP;
-      Drawer.controls.touch = 0;
+      Drawer.controls.touch += 1;
+      if (Drawer.controls.touch > 0 ){
+          Drawer.controls.touch = 0;
+        }
     }
 
     //set the new position of the camera
