@@ -119,7 +119,6 @@ window.requestAnimFrame = (function(){
     //Note this.worldHeight should be the same as  viewportHeight for this example
 
     this.cameraSpeed = 200;
-    this.touchSpeed = 300;
   }
 
 
@@ -180,8 +179,8 @@ window.requestAnimFrame = (function(){
   function Tshirt(x,y,imageSrc){
     this.xWorldPos = x;
     this.yWorldPos = y;
-    this.width = 220;
-    this.height = 260;
+    this.width = 270;
+    this.height = 320;
     this.hangerWidth = 50;
     this.hangerHeight = 50;
     this.hanger = new Image()
@@ -219,7 +218,7 @@ window.requestAnimFrame = (function(){
     this.Tshirts = [];
     this.HangerSpotY = 10;
     this.emptyHangerSpot = 1; 
-    this.hangerSpotWidth = 250;
+    this.hangerSpotWidth = 300;
     this.canvas = document.getElementById("DrawerCanvas");
 
     this.image = new Image();
