@@ -228,6 +228,7 @@ window.requestAnimFrame = (function(){
       var e = event;
     
     var tx = e.pageX - this.canvas.offsetLeft;
+    alert(tx);
     if(tx<0){
       Drawer.controls.left = true;
     }
