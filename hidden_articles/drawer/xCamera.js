@@ -216,9 +216,9 @@ window.requestAnimFrame = (function(){
     this.image = new Image();
     this.image.src = "drawer.png";
 
-    this.canvas.addEventListener("touchstart", touchStart, false);
-    this.canvas.addEventListener("touchend", touchEnd, false);
-    this.canvas.addEventListener("touchmove", touchX, false);
+    this.canvas.addEventListener("touchstart", this.touchStart, false);
+    this.canvas.addEventListener("touchend", this.touchEnd, false);
+    this.canvas.addEventListener("touchmove", this.touchX, false);
 
 
     this.touch_x = 0;
