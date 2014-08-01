@@ -139,6 +139,7 @@ window.requestAnimFrame = (function(){
 
 
 
+
     if (Drawer.controls.touch > 0)
     {
       this.xView -= Drawer.controls.touch  * Drawer.STEP;
@@ -257,6 +258,14 @@ window.requestAnimFrame = (function(){
      // else //swiped to left
      // {
         Drawer.controls.touch = end_touch - this.touch_x;
+        if ( Drawer.controls.touch > 50  ){
+          Drawer.controls.touch = 50;
+        }
+        
+        if ( Drawer.controls.touch < -50  ){
+          Drawer.controls.touch = -50;
+        }
+
      // }
   }
   
