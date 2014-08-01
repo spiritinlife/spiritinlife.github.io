@@ -138,9 +138,10 @@ window.requestAnimFrame = (function(){
     }
 
 
+
     if (Drawer.controls.touch > 0)
     {
-      this.xView -= this.touchSpeed  * Drawer.STEP;
+      this.xView -= Drawer.controls.touch  * Drawer.STEP;
       Drawer.controls.touch -= 1;
       if (Drawer.controls.touch < 0 ){
         Drawer.controls.touch = 0;
@@ -149,7 +150,7 @@ window.requestAnimFrame = (function(){
 
     if (Drawer.controls.touch < 0)
     {
-      this.xView += this.touchSpeed  * Drawer.STEP;
+      this.xView += Drawer.controls.touch  * Drawer.STEP;
       Drawer.controls.touch += 1;
       if (Drawer.controls.touch > 0 ){
           Drawer.controls.touch = 0;
