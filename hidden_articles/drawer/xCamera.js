@@ -181,8 +181,8 @@ window.requestAnimFrame = (function(){
     this.yWorldPos = y;
     this.width = 270;
     this.height = 320;
-    this.hangerWidth = 70;
-    this.hangerHeight = 70;
+    this.hangerWidth = 55;
+    this.hangerHeight = 55;
     this.hanger = new Image()
     this.hanger.src = "hanger.png"
     this.image = new Image();
@@ -202,7 +202,7 @@ window.requestAnimFrame = (function(){
       
       //convert world x-cords to camera viewports x-cords      
       context.drawImage(this.hanger,(this.xWorldPos-this.hangerWidth/2) - camera.xView, this.yWorldPos,this.hangerWidth,this.hangerHeight);
-      context.drawImage(this.image,(this.xWorldPos-this.width/2) - camera.xView, this.yWorldPos+65,this.width,this.height);
+      context.drawImage(this.image,(this.xWorldPos-this.width/2) - camera.xView, this.yWorldPos+51,this.width,this.height);
     }
   }
 
