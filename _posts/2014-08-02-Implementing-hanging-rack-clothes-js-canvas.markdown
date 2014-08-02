@@ -238,13 +238,15 @@ We also define one function :
   xCamera.prototype.updateViewport = function() {
 
     if (HangingRack.controls.left === true){
-      //Update the position of Camera
+      //Update the position of Camera 
+      //Left means that we need to see more to the  right so we add
       this.xView += this.cameraSpeed * HangingRack.STEP;
     }
 
 
     if (HangingRack.controls.right === true){
       //Update the position of Camera
+      //Right means that we need to see more to the left so we subtract
       this.xView -= this.cameraSpeed * HangingRack.STEP;
 
     }
