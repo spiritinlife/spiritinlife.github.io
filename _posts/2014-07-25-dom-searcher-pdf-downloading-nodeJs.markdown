@@ -23,6 +23,7 @@ Furthemore i wanted to play with the eventemitter so the downloadPdf function in
 Ok so here is the whole code.
 
 {% highlight javascript %}
+
 var fs = require('fs');
 var http = require('http');
 var EventEmitter = require('events').EventEmitter,
