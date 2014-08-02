@@ -38,7 +38,7 @@ So now for the fun part.
 
 First lets define some global variables.\n
 
-{% highlight javascript %}
+{% highlight JavaScript %}
 //Define global variable
 window.HangingRack = {};
 
