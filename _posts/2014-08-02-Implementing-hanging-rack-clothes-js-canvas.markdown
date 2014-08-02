@@ -27,8 +27,9 @@ For the impatient here is   <a href="http://spiritinlife.github.io/hidden_articl
 
 So we start with the html.
 
-Html is simple i just created a simple page with a canvas tag and script link in the body.
-{% highlight javascript  %}	
+Html is simple i just created a simple page with a canvas tag and script link in the body.\n
+
+{% highlight html  %}	
 		<canvas id="HangingRackCanvas" width=2000 height=600></canvas>
 		<script type="text/javascript" src="xCamera.js"></script>
 
@@ -40,7 +41,7 @@ Notice the id of the canvas "HangingRackCanvas" i will use this later to find th
 
 So now for the fun part.
 
-First lets define some global variables.
+First lets define some global variables.\n
 
 {% highlight javascript %}
 //Define global variable
@@ -52,7 +53,7 @@ HangingRack.INTERVAL = 1000/HangingRack.FPS; // milliseconds
 HangingRack.STEP = HangingRack.INTERVAL/1000; // seconds
 {% endhighlight %}
 
-After that i define my controls which are keyboards left/right to move on the x-axis
+After that i define my controls which are keyboards left/right to move on the x-axis\n
 
 {% highlight javascript linenos=table%}
 HangingRack.controls = {
