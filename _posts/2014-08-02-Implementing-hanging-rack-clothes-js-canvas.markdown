@@ -29,11 +29,6 @@ So we start with the html.
 
 Html is simple i just created a simple page with a canvas tag and script link in the body.\n
 
-{% highlight html  %}	
-		<canvas id="HangingRackCanvas" width=2000 height=600></canvas>
-		<script type="text/javascript" src="xCamera.js"></script>
-
-{% endhighlight %}
 
 Notice the id of the canvas "HangingRackCanvas" i will use this later to find the canvas from javascript.
 
