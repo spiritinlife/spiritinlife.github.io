@@ -307,7 +307,7 @@ This is  (this.xWorldPos-this.hangerWidth/2) - camera.xView.
 We need this because lets say a shirt has x-cord of 200 in the world and the camera has x-cord of 20 in the world.Then if we did not do this the shirt would be drawn on the
 200 x-cord of the viewports coordinates but we want it to be drawn on the 200-20=180 x-cord.I dont know id that makes sense :/
 
-{% highlight javasript %}
+{% highlight javascript %}
 
 (function(){
   function Tshirt(x,y,imageSrc){
@@ -343,5 +343,171 @@ We need this because lets say a shirt has x-cord of 200 in the world and the cam
   HangingRack.Tshirt = Tshirt;
 
 })();
+
+
+
 {% endhighlight %}
 
+
+After that we code the code that glues all these together.
+It is responsible for the drawing of stuff,plus it draws the hanger rack on the camera.
+It creates all tshirts and iterates through them in the draw function in order to draw them..
+It also draws the hanging rack image.
+It also defines some functions that handle the touch events inside the canvas ( i may talk about them in another article )
+-Note teh creation of the tshirt in the real world example we would func an asychronous download of icons.
+
+
+
+
+{% highlight javascript %}
+
+
+(function(){
+
+  function HangingRackWorld(width,height){
+    this.width = width;
+    this.height = height;
+    this.Tshirts = [];
+    this.HangerSpotY = 10;
+    this.emptyHangerSpot = 1; 
+    this.hangerSpotWidth = 300;
+    this.canvas = document.getElementById("HangingRackCanvas");
+
+    this.image = new Image();
+    this.image.src =  "hangingRack.png";
+
+    this.canvas.addEventListener("touchstart", this.touchStart, false);
+    this.canvas.addEventListener("touchend", this.touchEnd, false);
+    this.canvas.addEventListener("touchmove", this.touchX, false);
+
+
+    this.touch_x = 0;
+    this.dist_touch_x = 0;
+
+    this.images = ["shirt.jpg"];
+    for (var i = 100; i >= 0; i--) {
+
+      this.Tshirts.push(new HangingRack.Tshirt(this.emptyHangerSpot*this.hangerSpotWidth,this.HangerSpotY,this.images[0]) );
+      this.emptyHangerSpot += 1
+    };
+
+  }
+
+
+  HangingRackWorld.prototype.touchStart = function(e){
+      this.touch_x = e.changedTouches[0].clientX;
+      this.dist_touch_x = 0;
+    
+  }
+  
+  HangingRackWorld.prototype.touchEnd = function(e){
+      var end_touch = e.changedTouches[0].clientX; 
+      HangingRack.controls.touch = end_touch - this.touch_x;
+      if ( HangingRack.controls.touch > 150  ){
+        HangingRack.controls.touch = 150;
+      }
+      
+      if ( HangingRack.controls.touch < -150  ){
+        HangingRack.controls.touch = -150;
+      }     
+  }
+  
+  HangingRackWorld.prototype.touchX = function(e){
+    this.dist_touch_x += this.touch_x - e.changedTouches[0].clientX;
+  }
+
+  HangingRackWorld.prototype.draw = function(context,camera){
+
+      //We draw the HangingRack Image all over the camera viewport
+      context.drawImage(this.image,0,0,this.canvas.width,100);
+
+
+      //and then we draw all the tshirts
+      for (var i = this.Tshirts.length - 1; i >= 0; i--) {
+        this.Tshirts[i].draw(context,camera);
+      };
+  }
+
+
+
+
+  HangingRack.HangingRackWorld = HangingRackWorld;
+})();
+
+{% endhighlight %}
+
+
+
+
+After that we have a class that defines the game loop.
+It first creates the HangingRackWorld we defined above with the worlds width and height.
+And the creates the camera with canvas width height worlds size and x,y coords .
+After that we have our gameloop, which first updates the camera viewports(if right or left has been pressed) and then renders the scence calling our hangingRackWorld draw function
+
+{% highlight javascript %}
+
+
+(function(){
+  // prepaire our game canvas
+    
+  function GameSetup(){
+   
+    this.canvas = document.getElementById("HangingRackCanvas");
+    this.context = this.canvas.getContext("2d");
+  
+    this.hangingRack = new HangingRack.HangingRackWorld(6000,500);
+    this.camera = new HangingRack.xCamera(this.canvas.width, this.canvas.height, 6000,500,1350,0);
+  
+  }
+
+
+  GameSetup.prototype.renderScene = function(){
+        // clear the entire canvas
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        // redraw all objects
+        this.hangingRack.draw(this.context, this.camera);   
+      }
+  
+  GameSetup.prototype.updateScene = function(){
+      this.camera.updateViewport();
+    }
+  
+  GameSetup.prototype.gameLoop = function(){
+      this.updateScene();
+      this.renderScene();
+    }
+
+
+
+  HangingRack.GameSetup = GameSetup;
+      
+
+})();
+
+
+{% endhighlight %}
+
+
+Last but not least we need to start all these when page loaded
+We instatiate our GameSetup object and define the play function which is starts the game loop ( loop because it calls it self).If you wonder about requestAnimFrame is the new way to create animations suported i think from al browsers (instead of setTinterval) check the web for more info.
+
+
+
+{% highlight javascript %}
+
+//start the game when page is loaded
+window.onload = function(){ 
+
+  var gameSetup = new HangingRack.GameSetup();
+  function play(){
+    requestAnimFrame(play);
+    gameSetup.gameLoop();  
+  }
+  requestAnimFrame(play);
+}
+
+{% endhighlight %}
+
+
+That is all folks!!
