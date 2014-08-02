@@ -289,3 +289,141 @@ We also define one function :
 })();
 
 {% endhighlight %}
+
+
+
+
+
+
+Next we define our tshirt.
+It has its own world coords,width and height.
+It also defines a hanger object (which is used to have a better visual effect).
+And a function which is called draw which gets the canvas context and draws the hanger and the tshirt in the viewports coords.
+Notice that i say viewports coords.That is because as we said tshirts have world coords but when we want to draw them(which means that they fall in the viewports coordinates) 
+we need to think where they belong and since we only move camera on the x-axis we only need to do this on the x-axis.
+So what we say is , that the tshirts starting drawing x-position is the position that it has in the world - its width/2(because we want half of the tshirt left of x-position 
+and half of it to the right) - camera.xView.
+This is  (this.xWorldPos-this.hangerWidth/2) - camera.xView.
+We need this because lets say a shirt has x-cord of 200 in the world and the camera has x-cord of 20 in the world.Then if we did not do this the shirt would be drawn on the
+200 x-cord of the viewports coordinates but we want it to be drawn on the 200-20=180 x-cord.I dont know id that makes sense :/
+
+{% highlight javasript %}
+
+(function(){
+  function Tshirt(x,y,imageSrc){
+    this.xWorldPos = x;
+    this.yWorldPos = y;
+    this.width = 270;
+    this.height = 320;
+    this.hangerWidth = 55;
+    this.hangerHeight = 55;
+    this.hanger = new Image()
+    this.hanger.src = "hanger.png"
+    this.image = new Image();
+    this.image.src = imageSrc;
+    this.imageLoaded = false;
+    var self = this;
+    this.image.onload = function() {
+        self.imageLoaded = true;
+    };
+
+  }
+
+
+  Tshirt.prototype.draw = function(context,camera){
+    //if the shirts world position is within the camera viewport then it should be drawn
+    if(this.imageLoaded && this.xWorldPos - this.width <= camera.xView + camera.viewportWidth && this.xWorldPos + this.width >= camera.xView){ 
+      
+      //convert world x-cords to camera viewports x-cords      
+      context.drawImage(this.hanger,(this.xWorldPos-this.hangerWidth/2) - camera.xView, this.yWorldPos,this.hangerWidth,this.hangerHeight);
+      context.drawImage(this.image,(this.xWorldPos-this.width/2) - camera.xView, this.yWorldPos+51,this.width,this.height);
+    }
+  }
+
+  HangingRack.Tshirt = Tshirt;
+
+})();
+{% endhighlight %}
+
+
+After that we code the code that glues all these together.
+It is responsible for the drawing of stuff,plus it draws the hanger rack on the camera.
+It creates all tshirts and iterates through them in the draw function in order to draw them..
+It also draws the hanging rack image.
+It also defines some functions that handle the touch events inside the canvas ( i may talk about them in another article )
+-Note teh creation of the tshirt in the real world example we would func an asychronous download of icons.
+{% highlight javascript %}
+(function(){
+
+  function HangingRackWorld(width,height){
+    this.width = width;
+    this.height = height;
+    this.Tshirts = [];
+    this.HangerSpotY = 10;
+    this.emptyHangerSpot = 1; 
+    this.hangerSpotWidth = 300;
+    this.canvas = document.getElementById("HangingRackCanvas");
+
+    this.image = new Image();
+    this.image.src =  "hangingRack.png";
+
+    this.canvas.addEventListener("touchstart", this.touchStart, false);
+    this.canvas.addEventListener("touchend", this.touchEnd, false);
+    this.canvas.addEventListener("touchmove", this.touchX, false);
+
+
+    this.touch_x = 0;
+    this.dist_touch_x = 0;
+
+    this.images = ["shirt.jpg"];
+    for (var i = 100; i >= 0; i--) {
+
+      this.Tshirts.push(new HangingRack.Tshirt(this.emptyHangerSpot*this.hangerSpotWidth,this.HangerSpotY,this.images[0]) );
+      this.emptyHangerSpot += 1
+    };
+
+  }
+
+
+  HangingRackWorld.prototype.touchStart = function(e){
+      this.touch_x = e.changedTouches[0].clientX;
+      this.dist_touch_x = 0;
+    
+  }
+  
+  HangingRackWorld.prototype.touchEnd = function(e){
+      var end_touch = e.changedTouches[0].clientX; 
+      HangingRack.controls.touch = end_touch - this.touch_x;
+      if ( HangingRack.controls.touch > 150  ){
+        HangingRack.controls.touch = 150;
+      }
+      
+      if ( HangingRack.controls.touch < -150  ){
+        HangingRack.controls.touch = -150;
+      }     
+  }
+  
+  HangingRackWorld.prototype.touchX = function(e){
+    this.dist_touch_x += this.touch_x - e.changedTouches[0].clientX;
+  }
+
+  HangingRackWorld.prototype.draw = function(context,camera){
+
+      //We draw the HangingRack Image all over the camera viewport
+      context.drawImage(this.image,0,0,this.canvas.width,100);
+
+
+      //and then we draw all the tshirts
+      for (var i = this.Tshirts.length - 1; i >= 0; i--) {
+        this.Tshirts[i].draw(context,camera);
+      };
+  }
+
+
+
+
+  HangingRack.HangingRackWorld = HangingRackWorld;
+})();
+{% endhighlight %}
+
+
