@@ -133,8 +133,7 @@ Lets see what we try to do
 We will have a big world in our mind in which we can only see a certain amount of space so in poor graphics it looks like this
 
 
-{% gist 420caeea2780fad17d41 %}
-
+<img src="/images/camera_world_cords_explained.png">
 
 
 
