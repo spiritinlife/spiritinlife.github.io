@@ -26,3 +26,29 @@ For the impatient here is   <a href="http://spiritinlife.github.io/hidden_articl
 + code is on github under https://github.com/spiritinlife/spiritinlife.github.io/tree/master/hidden_articles/HangingRack
 
 So we start with the html.
+Html is simple i just created a simple page with a canvas tag and script link in the body.
+{% highlight html %}
+<!DOCTYPE html>
+<html>
+	<head>
+		 <link rel="stylesheet" type="text/css" href="main.css">
+		 <title>
+		 	HangingRack v1.0.0
+		 </title>
+	</head>
+	<body>
+
+		<header>
+		</header>
+		
+		<canvas id="HangingRackCanvas" width=2000 height=600></canvas>
+
+		<script type="text/javascript" src="xCamera.js"></script>
+
+	</body>
+
+</html>
+
+{% endhighlight %}
+
+Notice the id of the canvas "HangingRackCanvas" i will use this later to find the canvas from javascript.
