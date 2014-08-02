@@ -118,6 +118,7 @@ window.requestAnimFrame = (function(){
           };
 })();
 {% endhighlight %}
+
 -Extra tip: Watch out for javascript's fricking semicolon insertion 
 
 
@@ -190,7 +191,7 @@ This function is usefull because we do not want the camera viewport to go out of
 })();
 
 
-{% endhiglight %}
+{% endhighlight %}
 
 {% highlight javascript %}
 
@@ -292,7 +293,7 @@ We also define one function :
    HangingRack.xCamera = xCamera;
 })();
 
-{% endhiglight %}
+{% endhighlight %}
 
 Next we define out tshirt.
 It has its own world coords,width and height.
@@ -342,7 +343,7 @@ We need this because lets say a shirt has x-cord of 200 in the world and the cam
   HangingRack.Tshirt = Tshirt;
 
 })();
-{%endhighlight %}
+{% endhighlight %}
 
 
 After that we code the code that glues all these together.
