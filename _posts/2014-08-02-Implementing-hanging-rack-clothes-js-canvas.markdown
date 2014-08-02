@@ -28,27 +28,10 @@ For the impatient here is   <a href="http://spiritinlife.github.io/hidden_articl
 So we start with the html.
 
 Html is simple i just created a simple page with a canvas tag and script link in the body.
-{% highlight HTML %}
-<!DOCTYPE html>
-<html>
-	<head>
-		 <link rel="stylesheet" type="text/css" href="main.css">
-		 <title>
-		 	HangingRack v1.0.0
-		 </title>
-	</head>
-	<body>
-
-		<header>
-		</header>
-		
+{% highlight HTML %}	
 		<canvas id="HangingRackCanvas" width=2000 height=600></canvas>
 
 		<script type="text/javascript" src="xCamera.js"></script>
-
-	</body>
-
-</html>
 
 {% endhighlight %}
 
