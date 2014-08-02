@@ -22,7 +22,7 @@ with no purpose,meaning if i have 100 tshirts then i have 100 divs in my dom eve
 So i ruled out this way and started thinking with html5 canvas and javascript.<br>
 If you think about it what i tried to implement was a side scroller game so it was not just html5 canvas rendering i had to implement game mechanincs,camera viewport,world coordinates.<br>
 Challenge accepted sister!<br>
-For the impatient here is   <a href="http://spiritinlife.github.io/hidden_articles/HangingRack/">the end result</a><br>
+For the impatient here is   <a href="http://spiritinlife.github.io/hidden_articles/HangingRack/">the end result</a> ( left/right arrow keys for moving )<br>
 + code is on github <a href="https://github.com/spiritinlife/spiritinlife.github.io/tree/master/hidden_articles/HangingRack">Here</a><br>
 
 So we start with the html.<br>
