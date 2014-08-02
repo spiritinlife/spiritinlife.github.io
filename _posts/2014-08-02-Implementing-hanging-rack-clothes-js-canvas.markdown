@@ -484,27 +484,3 @@ After that we have our gameloop, which first updates the camera viewports(if rig
 
 
 {% endhighlight %}
-
-
-Last but not least we need to start all these when page loaded
-We instatiate our GameSetup object and define the play function which is starts the game loop ( loop because it calls it self).If you wonder about requestAnimFrame is the new way to create animations suported i think from al browsers (instead of setTinterval) check the web for more info.
-
-
-
-{% highlight javascript %}
-
-//start the game when page is loaded
-window.onload = function(){ 
-
-  var gameSetup = new HangingRack.GameSetup();
-  function play(){
-    requestAnimFrame(play);
-    gameSetup.gameLoop();  
-  }
-  requestAnimFrame(play);
-}
-
-{% endhighlight %}
-
-
-Thats is all folks!!
