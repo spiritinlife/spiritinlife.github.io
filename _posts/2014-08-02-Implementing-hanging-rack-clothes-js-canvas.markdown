@@ -352,7 +352,13 @@ It creates all tshirts and iterates through them in the draw function in order t
 It also draws the hanging rack image.
 It also defines some functions that handle the touch events inside the canvas ( i may talk about them in another article )
 -Note teh creation of the tshirt in the real world example we would func an asychronous download of icons.
+
+
+
+
 {% highlight javascript %}
+
+
 (function(){
 
   function HangingRackWorld(width,height){
@@ -424,6 +430,7 @@ It also defines some functions that handle the touch events inside the canvas ( 
 
   HangingRack.HangingRackWorld = HangingRackWorld;
 })();
+
 {% endhighlight %}
 
 
