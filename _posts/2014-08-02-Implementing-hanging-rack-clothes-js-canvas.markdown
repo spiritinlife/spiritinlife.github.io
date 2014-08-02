@@ -434,3 +434,77 @@ It also defines some functions that handle the touch events inside the canvas ( 
 {% endhighlight %}
 
 
+
+
+After that we have a class that defines the game loop.
+It first creates the HangingRackWorld we defined above with the worlds width and height.
+And the creates the camera with canvas width height worlds size and x,y coords .
+After that we have our gameloop, which first updates the camera viewports(if right or left has been pressed) and then renders the scence calling our hangingRackWorld draw function
+
+{% highlight javascript %}
+
+
+(function(){
+  // prepaire our game canvas
+    
+  function GameSetup(){
+   
+    this.canvas = document.getElementById("HangingRackCanvas");
+    this.context = this.canvas.getContext("2d");
+  
+    this.hangingRack = new HangingRack.HangingRackWorld(6000,500);
+    this.camera = new HangingRack.xCamera(this.canvas.width, this.canvas.height, 6000,500,1350,0);
+  
+  }
+
+
+  GameSetup.prototype.renderScene = function(){
+        // clear the entire canvas
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        // redraw all objects
+        this.hangingRack.draw(this.context, this.camera);   
+      }
+  
+  GameSetup.prototype.updateScene = function(){
+      this.camera.updateViewport();
+    }
+  
+  GameSetup.prototype.gameLoop = function(){
+      this.updateScene();
+      this.renderScene();
+    }
+
+
+
+  HangingRack.GameSetup = GameSetup;
+      
+
+})();
+
+
+{% endhighlight %}
+
+
+Last but not least we need to start all these when page loaded
+We instatiate our GameSetup object and define the play function which is starts the game loop ( loop because it calls it self).If you wonder about requestAnimFrame is the new way to create animations suported i think from al browsers (instead of setTinterval) check the web for more info.
+
+
+
+{% highlight javascript %}
+
+//start the game when page is loaded
+window.onload = function(){ 
+
+  var gameSetup = new HangingRack.GameSetup();
+  function play(){
+    requestAnimFrame(play);
+    gameSetup.gameLoop();  
+  }
+  requestAnimFrame(play);
+}
+
+{% endhighlight %}
+
+
+Thats is all folks!!
