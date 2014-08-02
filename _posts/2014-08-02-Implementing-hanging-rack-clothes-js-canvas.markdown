@@ -16,11 +16,11 @@ So my first attempt was to try and do it with html and css .<br>
 I thought i could have a very big div that would have tshirts inside it (as divs also) with margin:50px and overflow:hidden.<br>
 Then i could use css animations to move them.<br>
 I did come to an almost satiisfying result but it was not perfect and the worst part was that i could not dynamicaly add tshirts.<br>
-In order to add a tshirt i would have to change the html and add a div with the proper img src etc and even worse everythign was sitting in the dom<br>
+In order to add a tshirt i would have to change the html and add a div with the proper img src  and even worse everythign was sitting in the dom<br>
 with no purpose,meaning if i have 100 tshirts then i have 100 divs in my dom even though they are not shown in the screen.<br>
 
 So i ruled out this way and started thinking with html5 canvas and javascript.<br>
-If you think about it what i tried to implement was a side scroller game so it was not just html5 canvas rendering i had to implement game mechanincs,camera viewport,world coordinates.<br>
+If you think about it what i tried to implement was a side scroller game but it was not just html5 canvas rendering i had to implement game mechanincs,camera viewport,world coordinates.<br>
 Challenge accepted sister!<br>
 For the impatient here is   <a href="http://spiritinlife.github.io/hidden_articles/HangingRack/">the end result</a> ( left/right arrow keys for moving )<br>
 + code is on github <a href="https://github.com/spiritinlife/spiritinlife.github.io/tree/master/hidden_articles/HangingRack">Here</a><br>
@@ -111,7 +111,7 @@ window.addEventListener("keyup", function(e){
 
 This code just says that when you press left arrow set the HangingRack.controls.left to true and when you release set it to false (the same for right arrow)
 
-After that i define a function which handles the game loop .There are numerous articles on the web saying that you should use this and not plain old setInterval.
+After that i define a function which handles the game loop .There are numerous articles on the web saying that you should use this requestAnimFrame and not plain old setInterval.
 
 {% highlight javascript %}
 window.requestAnimFrame = (function(){
@@ -142,11 +142,12 @@ The viewport/Camera is actually the size of the canvas and the world's size is i
 So this is usefull because now we can say that if we 200 tshirts to show that each have 250 width we can start assigning (x,y) coordinates from the (0,0) point of the world until the end
 So first shirt is (0,0) ,second is (300,0) ,third is (600,0) (we give a 50px margin between them).
 So as we dynamically load these icons we put them in our world coordinate system.
-But this is where it gets awesome , we do not actually put meaning that we do not actually draw them we just say where they belong in our world.In that way we do not use any computational power to actually draw .We will only draw what we can see (this is actually how all games work).
+But this is where it gets awesome , we do not actually put them, meaning that we do not actually draw them we just say where they belong in our world.In that way we do not use any computational power to actually draw them.We will only draw what we can see (this is actually how all games work).
 
-So our camera also has a coordinate system in the world .It could start from the (0,0) and expand to (0+camera.width,0+camera.height).That defines the space in which we pick shirts(icons )
+So our camera also has a coordinate system in the world.<br>
+It could start from the (0,0) and expand to (0+camera.width,0+camera.height).That defines the space in which we pick shirts(icons )
 from the world and draw them on the canvas.
-Furthermore we can now scroll by moving the camera inside out world .We can say that when you press right arrow camera moves from (0,0) to (10,0) and expands to (10+camera.width,0+camera.height).In that way we start drawing new icons and stop drawing old ones(everything that has x world coordinate less than 10 in this example)
+Furthermore we can now scroll by moving the camera inside our world .We can say that when you press left arrow ,camera moves from (0,0) to (10,0) and expands to (10+camera.width,0+camera.height).In that way we start drawing new icons and stop drawing old ones(everything that has x world coordinate less than 10 in this example)
 
 
 
@@ -188,9 +189,9 @@ This function is usefull because we do not want the camera viewport to go out of
 So now we can implement our camera  as rectangle.
 Next we define our camera class.
 Camera has its own world coordinates xView,yView , viewport width and height and world width and height
-So we create two rectangles one that has the camera viewport and one that has the cameras world(actually the whole world-there is no other world just the cameras).
+So we create two rectangles one that has the camera viewport and one that has the camera's world(actually the whole world-there is no other world just the camera's).
 We also define one function :
--updateViewport uses the HangingRack.controls left and right to interpolate the xView and yView by a speed of 200/FPS when they are pressed.It also performs a trick that will be  explained  later so that we can identify touches (for mobile compatibility).It also checks if the the viewport is in the world after the change and if it is not it forces it to be.
+-updateViewport: which uses the HangingRack.controls left and right to interpolate the xView and yView by a speed of 200/FPS when they are pressed.It also performs a trick that will be  explained  later so that we can identify touches (for mobile compatibility).It also checks if the the viewport is in the world after the change and if it is not it forces it to be.
 
 {% highlight javascript %}
 
@@ -297,15 +298,15 @@ We also define one function :
 
 Next we define our tshirt.
 It has its own world coords,width and height.
-It also defines a hanger object (which is used to have a better visual effect).
-And a function which is called draw which gets the canvas context and draws the hanger and the tshirt in the viewports coords.
-Notice that i say viewports coords.That is because as we said tshirts have world coords but when we want to draw them(which means that they fall in the viewports coordinates) 
+It also has a hanger icon  (which is used to have a better visual effect).
+And a function which is called 'draw' , which gets the canvas context and draws the hanger and the tshirt in the viewports coords.
+Notice that i say viewports coords.That is because as we said tshirts have world coords but when we want to draw them(which means that they fall in the viewport's space) 
 we need to think where they belong and since we only move camera on the x-axis we only need to do this on the x-axis.
-So what we say is , that the tshirts starting drawing x-position is the position that it has in the world - its width/2(because we want half of the tshirt left of x-position 
-and half of it to the right) - camera.xView.
+So what we say is , that the tshirt's initial drawing x-position is the position that it has in the world minus its width/2(because we want half of the tshirt left of x-position 
+and half of it to the right) minus camera.xView.
 This is  (this.xWorldPos-this.hangerWidth/2) - camera.xView.
-We need this because lets say a shirt has x-cord of 200 in the world and the camera has x-cord of 20 in the world.Then if we did not do this the shirt would be drawn on the
-200 x-cord of the viewports coordinates but we want it to be drawn on the 200-20=180 x-cord.I dont know id that makes sense :/
+We need this because lets say a shirt has x-cord of 200 in the world and the camera has x-cord of 20 in the world and the camera's width is 400(Which means shirt is in vieport's space),then if we did not do this the shirt would be drawn on the
+200 x-cord of the viewports coordinates but we want it to be drawn on the 200-20=180 x-cord.I dont know if that makes sense :/
 
 {% highlight javascript %}
 
@@ -349,12 +350,11 @@ We need this because lets say a shirt has x-cord of 200 in the world and the cam
 {% endhighlight %}
 
 
-After that we code the code that glues all these together.
-It is responsible for the drawing of stuff,plus it draws the hanger rack on the camera.
+After that we define the code that glues all these together.
+It is responsible for the drawing of stuff,plus it draws the hanger rack on the canvas .
 It creates all tshirts and iterates through them in the draw function in order to draw them..
-It also draws the hanging rack image.
 It also defines some functions that handle the touch events inside the canvas ( i may talk about them in another article )
--Note teh creation of the tshirt in the real world example we would func an asychronous download of icons.
+-Note for the creation of the tshirts in a real world example we would use an asychronous function to download the icons and assign them in the world as they get downloaded.For now lets say we have 100 tshirts with the same icon.
 
 
 
@@ -441,7 +441,7 @@ It also defines some functions that handle the touch events inside the canvas ( 
 
 After that we have a class that defines the game loop.
 It first creates the HangingRackWorld we defined above with the worlds width and height.
-And the creates the camera with canvas width height worlds size and x,y coords .
+And then creates the camera with canvas width height ,worlds size and x,y coords .
 After that we have our gameloop, which first updates the camera viewports(if right or left has been pressed) and then renders the scence calling our hangingRackWorld draw function
 
 {% highlight javascript %}
@@ -490,7 +490,7 @@ After that we have our gameloop, which first updates the camera viewports(if rig
 
 
 Last but not least we need to start all these when page loads.<br>
-We instatiate our GameSetup object and define the play function which  starts the game loop ( loop because it calls itself).If you wonder about requestAnimFrame(instead of setTinterval), it is the best way to create animations, suported i think from al browsers  check the web for more info.
+We instatiate our GameSetup object and define the play function which  starts the game loop ( loop because it calls itself).If you wonder about requestAnimFrame(instead of setTinterval), it is the best way to create animations, suported i think from all browsers  check the web for more info.
 
 
 
