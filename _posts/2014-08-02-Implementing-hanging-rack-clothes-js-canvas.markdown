@@ -135,3 +135,157 @@ We will have a big world in our mind in which we can only see a certain amount o
 <img src="/images/camera_world_cords_explained.png">
 
 
+
+
+The viewport/Camera is actually the size of the canvas and the world's size is in this example(as you will see later) set to 6000 but that could change dynamicaly.
+
+So this is usefull because now we can say that if we 200 tshirts to show that each have 250 width we can start assigning (x,y) coordinates from the (0,0) point of the world until the end
+So first shirt is (0,0) ,second is (300,0) ,third is (600,0) (we give a 50px margin between them).
+So as we dynamically load these icons we put them in our world coordinate system.
+But this is where it gets awesome , we do not actually put meaning that we do not actually draw them we just say where they belong in our world.In that way we do not use any computational power to actually draw .We will only draw what we can see (this is actually how all games work).
+
+So our camera also has a coordinate system in the world .It could start from the (0,0) and expand to (0+camera.width,0+camera.height).That defines the space in which we pick shirts(icons )
+from the world and draw them on the canvas.
+Furthermore we can now scroll by moving the camera inside out world .We can say that when you press right arrow camera moves from (0,0) to (10,0) and expands to (10+camera.width,0+camera.height).In that way we start drawing new icons and stop drawing old ones(everything that has x world coordinate less than 10 in this example)
+
+
+
+
+So now how we implement this..
+
+We first identify that world and camera are actually rectangles that have a left,right,width,height properties.
+So the next code creates a rectangle class with those properties and a function called inBounds which only purpose is to tell us if one rectangle is inside another.
+This function is usefull because we do not want the camera viewport to go out of world's coordinates.
+
+{% highlight javascript %}
+(function(){
+  function Rectangle(left,top,width,height){
+    this.left = left;
+    this.top = top;
+    this.width = width;
+    this.height = height;
+    this.right = this.left + this.width;
+    this.bottom = this.top + this.height;
+  }
+
+  Rectangle.prototype.set = function(left,top){
+    this.left = left || this.left;
+    this.top = top || this.top;
+  }
+
+  Rectangle.prototype.inBounds = function(otherRectangle){
+     return ( this.bottom <= otherRectangle.bottom && this.top >= otherRectangle.top && this.left >= otherRectangle.left && this.right <= otherRectangle.right);
+
+  }
+
+  HangingRack.Rectangle = Rectangle;
+})();
+
+
+{% endhighlight %}
+
+
+So now we can implement our camera  as rectangle.
+Next we define our camera class.
+Camera has its own world coordinates xView,yView , viewport width and height and world width and height
+So we create two rectangles one that has the camera viewport and one that has the cameras world(actually the whole world-there is no other world just the cameras).
+We also define one function :
+-updateViewport uses the HangingRack.controls left and right to interpolate the xView and yView by a speed of 200/FPS when they are pressed.It also performs a trick that will be  explained  later so that we can identify touches (for mobile compatibility).It also checks if the the viewport is in the world after the change and if it is not it forces it to be.
+
+{% highlight javascript %}
+
+
+(function(){
+  /****************************************
+  *       xCamera.js                *
+  * Implementation of a 2d camera on the  *
+  * xAxis only                            *
+  *****************************************/
+
+
+  //xCamera constructor
+  //xView is the position of the camera on x 
+  //yView is the position of the camera on y
+  //vWidth is the viewport width
+  //vHeight is the viewport height
+  //wHeight is the worlds height
+  //wHeight is the worlds width
+  function xCamera(vWidth,vHeight,wWidth,wHeight,xView,yView){
+
+    //Position of camera (default left-top)
+    this.xView = xView || 0;
+    this.yView = yView || 0;
+
+
+    //Viewport size
+    this.viewportWidth = vWidth;
+    this.viewportHeight = vHeight;
+
+    //World size
+    this.worldWidth = wWidth;
+    this.worldHeight = wHeight;
+
+
+    this.viewport = new  HangingRack.Rectangle(this.xView,this.yView,this.viewportWidth,this.viewportHeight);
+    this.world  = new  HangingRack.Rectangle(0,0,this.worldWidth,this.worldHeight);
+    //Note this.worldHeight should be the same as  viewportHeight for this example
+
+    this.cameraSpeed = 200;
+  }
+
+
+  xCamera.prototype.updateViewport = function() {
+
+    if (HangingRack.controls.left === true){
+      //Update the position of Camera 
+      //Left means that we need to see more to the  right so we add
+      this.xView += this.cameraSpeed * HangingRack.STEP;
+    }
+
+
+    if (HangingRack.controls.right === true){
+      //Update the position of Camera
+      //Right means that we need to see more to the left so we subtract
+      this.xView -= this.cameraSpeed * HangingRack.STEP;
+
+    }
+
+
+
+
+    if (HangingRack.controls.touch > 0)
+    {
+      this.xView -= HangingRack.controls.touch  * HangingRack.STEP;
+      HangingRack.controls.touch -= 1;
+      if (HangingRack.controls.touch < 0 ){
+        HangingRack.controls.touch = 0;
+      }
+    }
+
+    if (HangingRack.controls.touch < 0)
+    {
+      this.xView -= HangingRack.controls.touch  * HangingRack.STEP;
+      HangingRack.controls.touch += 1;
+      if (HangingRack.controls.touch > 0 ){
+          HangingRack.controls.touch = 0;
+        }
+    }
+
+    //set the new position of the camera
+    this.viewport.set(this.xView,this.yView);
+
+    // don't let camera leaves the world's boundary
+    if(!this.viewport.inBounds(this.world))
+    {
+      if(this.viewport.left < this.world.left)
+        this.xView = this.world.left;
+      
+      if(this.viewport.right > this.world.right)
+        this.xView = this.world.right - this.viewportWidth;
+    }
+  }
+
+   HangingRack.xCamera = xCamera;
+})();
+
+{% endhighlight %}
