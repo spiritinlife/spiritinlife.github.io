@@ -1,14 +1,14 @@
 
 
+//Define global variable
+window.HangingRack = {};
 
-window.Drawer = {};
+// game loop settings: 
+HangingRack.FPS = 30;
+HangingRack.INTERVAL = 1000/HangingRack.FPS; // milliseconds
+HangingRack.STEP = HangingRack.INTERVAL/1000; // seconds
 
-// game settings: 
-Drawer.FPS = 30;
-Drawer.INTERVAL = 1000/Drawer.FPS; // milliseconds
-Drawer.STEP = Drawer.INTERVAL/1000; // seconds
-
-Drawer.controls = {
+HangingRack.controls = {
   left:false,
   right:false
 }
@@ -17,10 +17,10 @@ window.addEventListener("keydown", function(e){
   switch(e.keyCode)
   {
     case 37: // left arrow
-      Drawer.controls.left = true;
+      HangingRack.controls.left = true;
       break;
     case 39: // right arrow
-      Drawer.controls.right = true;
+      HangingRack.controls.right = true;
       break;
   }
 }, false);
@@ -29,10 +29,10 @@ window.addEventListener("keyup", function(e){
   switch(e.keyCode)
   {
     case 37: // left arrow
-      Drawer.controls.left = false;
+      HangingRack.controls.left = false;
       break;
     case 39: // right arrow
-      Drawer.controls.right = false;
+      HangingRack.controls.right = false;
       break;
   }
 }, false);
@@ -47,7 +47,7 @@ window.requestAnimFrame = (function(){
           window.webkitRequestAnimationFrame ||
           window.mozRequestAnimationFrame    ||
           function( callback ){
-            window.setTimeout(callback, Drawer.FPS);
+            window.setTimeout(callback, HangingRack.FPS);
           };
 })();
 
@@ -73,7 +73,7 @@ window.requestAnimFrame = (function(){
 
   }
 
-  Drawer.Rectangle = Rectangle;
+  HangingRack.Rectangle = Rectangle;
 })();
 
 
@@ -114,8 +114,8 @@ window.requestAnimFrame = (function(){
     this.worldHeight = wHeight;
 
 
-    this.viewport = new  Drawer.Rectangle(this.xView,this.yView,this.viewportWidth,this.viewportHeight);
-    this.world  = new  Drawer.Rectangle(0,0,this.worldWidth,this.worldHeight);
+    this.viewport = new  HangingRack.Rectangle(this.xView,this.yView,this.viewportWidth,this.viewportHeight);
+    this.world  = new  HangingRack.Rectangle(0,0,this.worldWidth,this.worldHeight);
     //Note this.worldHeight should be the same as  viewportHeight for this example
 
     this.cameraSpeed = 200;
@@ -124,36 +124,36 @@ window.requestAnimFrame = (function(){
 
   xCamera.prototype.updateViewport = function() {
 
-    if (Drawer.controls.left === true){
+    if (HangingRack.controls.left === true){
       //Update the position of Camera
-      this.xView += this.cameraSpeed * Drawer.STEP;
+      this.xView += this.cameraSpeed * HangingRack.STEP;
     }
 
 
-    if (Drawer.controls.right === true){
+    if (HangingRack.controls.right === true){
       //Update the position of Camera
-      this.xView -= this.cameraSpeed * Drawer.STEP;
+      this.xView -= this.cameraSpeed * HangingRack.STEP;
 
     }
 
 
 
 
-    if (Drawer.controls.touch > 0)
+    if (HangingRack.controls.touch > 0)
     {
-      this.xView -= Drawer.controls.touch  * Drawer.STEP;
-      Drawer.controls.touch -= 1;
-      if (Drawer.controls.touch < 0 ){
-        Drawer.controls.touch = 0;
+      this.xView -= HangingRack.controls.touch  * HangingRack.STEP;
+      HangingRack.controls.touch -= 1;
+      if (HangingRack.controls.touch < 0 ){
+        HangingRack.controls.touch = 0;
       }
     }
 
-    if (Drawer.controls.touch < 0)
+    if (HangingRack.controls.touch < 0)
     {
-      this.xView -= Drawer.controls.touch  * Drawer.STEP;
-      Drawer.controls.touch += 1;
-      if (Drawer.controls.touch > 0 ){
-          Drawer.controls.touch = 0;
+      this.xView -= HangingRack.controls.touch  * HangingRack.STEP;
+      HangingRack.controls.touch += 1;
+      if (HangingRack.controls.touch > 0 ){
+          HangingRack.controls.touch = 0;
         }
     }
 
@@ -171,7 +171,7 @@ window.requestAnimFrame = (function(){
     }
   }
 
-   Drawer.xCamera = xCamera;
+   HangingRack.xCamera = xCamera;
 })();
 
 
@@ -206,23 +206,23 @@ window.requestAnimFrame = (function(){
     }
   }
 
-  Drawer.Tshirt = Tshirt;
+  HangingRack.Tshirt = Tshirt;
 
 })();
 
 (function(){
 
-  function DrawerWorld(width,height){
+  function HangingRackWorld(width,height){
     this.width = width;
     this.height = height;
     this.Tshirts = [];
     this.HangerSpotY = 10;
     this.emptyHangerSpot = 1; 
     this.hangerSpotWidth = 300;
-    this.canvas = document.getElementById("DrawerCanvas");
+    this.canvas = document.getElementById("HangingRackCanvas");
 
     this.image = new Image();
-    this.image.src = "drawer.png";
+    this.image.src =  "hangingRack.png";
 
     this.canvas.addEventListener("touchstart", this.touchStart, false);
     this.canvas.addEventListener("touchend", this.touchEnd, false);
@@ -235,46 +235,39 @@ window.requestAnimFrame = (function(){
     this.images = ["shirt.jpg"];
     for (var i = 100; i >= 0; i--) {
 
-      this.Tshirts.push(new Drawer.Tshirt(this.emptyHangerSpot*this.hangerSpotWidth,this.HangerSpotY,this.images[0]) );
+      this.Tshirts.push(new HangingRack.Tshirt(this.emptyHangerSpot*this.hangerSpotWidth,this.HangerSpotY,this.images[0]) );
       this.emptyHangerSpot += 1
     };
 
+    
   }
 
 
-  DrawerWorld.prototype.touchStart = function(e){
+  HangingRackWorld.prototype.touchStart = function(e){
       this.touch_x = e.changedTouches[0].clientX;
       this.dist_touch_x = 0;
     
   }
   
-  DrawerWorld.prototype.touchEnd = function(e){
+  HangingRackWorld.prototype.touchEnd = function(e){
       var end_touch = e.changedTouches[0].clientX; 
-     // if(end_touch >= this.touch_x)  //swiped to the right
-      //{
-     //   Drawer.controls.touch = end_touch - this.touch_x;
-     // }
-     // else //swiped to left
-     // {
-        Drawer.controls.touch = end_touch - this.touch_x;
-        if ( Drawer.controls.touch > 150  ){
-          Drawer.controls.touch = 150;
-        }
-        
-        if ( Drawer.controls.touch < -150  ){
-          Drawer.controls.touch = -150;
-        }
-
-     // }
+      HangingRack.controls.touch = end_touch - this.touch_x;
+      if ( HangingRack.controls.touch > 150  ){
+        HangingRack.controls.touch = 150;
+      }
+      
+      if ( HangingRack.controls.touch < -150  ){
+        HangingRack.controls.touch = -150;
+      }     
   }
   
-  DrawerWorld.prototype.touchX = function(e){
+  HangingRackWorld.prototype.touchX = function(e){
     this.dist_touch_x += this.touch_x - e.changedTouches[0].clientX;
   }
 
-  DrawerWorld.prototype.draw = function(context,camera){
+  HangingRackWorld.prototype.draw = function(context,camera){
 
-      //We draw the Drawer Image all over the camera viewport
+      //We draw the HangingRack Image all over the camera viewport
       context.drawImage(this.image,0,0,this.canvas.width,100);
 
 
@@ -287,7 +280,7 @@ window.requestAnimFrame = (function(){
 
 
 
-  Drawer.DrawerWorld = DrawerWorld;
+  HangingRack.HangingRackWorld = HangingRackWorld;
 })();
 
 
@@ -298,12 +291,13 @@ window.requestAnimFrame = (function(){
     
   function GameSetup(){
    
-    this.canvas = document.getElementById("DrawerCanvas");
+    this.canvas = document.getElementById("HangingRackCanvas");
     this.context = this.canvas.getContext("2d");
   
-    this.drawer = new Drawer.DrawerWorld(5000,500);
-    this.camera = new Drawer.xCamera(this.canvas.width, this.canvas.height, 5000,500,1350,0);
-  
+    this.hangingRack = new HangingRack.HangingRackWorld(5000,500);
+   //creates the camera,1350 is where the camera's x-cord is in te world
+    this.camera = new HangingRack.xCamera(this.canvas.width, this.canvas.height, this.width,this.height,1350,0);
+
   }
 
 
@@ -312,21 +306,21 @@ window.requestAnimFrame = (function(){
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         
         // redraw all objects
-        this.drawer.draw(this.context, this.camera);   
+        this.hangingRack.draw(this.context, this.camera);   
       }
   
   GameSetup.prototype.updateScene = function(){
       this.camera.updateViewport();
     }
   
-  GameSetup.prototype.drawerLoop = function(){
+  GameSetup.prototype.gameLoop = function(){
       this.updateScene();
       this.renderScene();
     }
 
 
 
-  Drawer.GameSetup = GameSetup;
+  HangingRack.GameSetup = GameSetup;
       
 
 })();
@@ -340,14 +334,14 @@ window.requestAnimFrame = (function(){
 
 //start the game when page is loaded
 window.onload = function(){ 
-  var canvas = document.getElementById("DrawerCanvas");
+  //var canvas = document.getElementById("HangingRackCanvas");
   //canvas.height = 500;
   //canvas.width = window.innerWidth;
 
-  var gameSetup = new Drawer.GameSetup();
+  var gameSetup = new HangingRack.GameSetup();
   function play(){
     requestAnimFrame(play);
-    gameSetup.drawerLoop();  
+    gameSetup.gameLoop();  
   }
   requestAnimFrame(play);
 }
