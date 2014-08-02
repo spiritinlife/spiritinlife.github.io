@@ -489,8 +489,8 @@ After that we have our gameloop, which first updates the camera viewports(if rig
 {% endhighlight %}
 
 
-Last but not least we need to start all these when page loaded
-We instatiate our GameSetup object and define the play function which is starts the game loop ( loop because it calls it self).If you wonder about requestAnimFrame is the new way to create animations suported i think from al browsers (instead of setTinterval) check the web for more info.
+Last but not least we need to start all these when page loads.<br>
+We instatiate our GameSetup object and define the play function which  starts the game loop ( loop because it calls itself).If you wonder about requestAnimFrame(instead of setTinterval), it is the new way to create animations, suported i think from al browsers  check the web for more info.
 
 
 
