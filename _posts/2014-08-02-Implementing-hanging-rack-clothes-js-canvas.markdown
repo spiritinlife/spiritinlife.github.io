@@ -2,7 +2,7 @@
 layout: post
 title:  "Hanging your clothes, the new way"
 date:   2014-08-02 9:48:00
-categories: javascript,canvas
+categories: javascript canvas
 ---
 
 
