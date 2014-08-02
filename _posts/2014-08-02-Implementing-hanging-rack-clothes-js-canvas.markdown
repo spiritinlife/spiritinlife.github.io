@@ -8,7 +8,7 @@ categories: javascript,canvas
 
 Ok as always , why did i do this ??<br>
 Well i came across <a href="https://www.drippinginfat.com/"> a site which sells clothes</a> and as you see they have made a nice way to showcase their clothes.<br>
-But they use flash technology , and i thought they should have done it with html5 and js.<br>
+But they use flash technology , and i thought hey that can  be done  with html5 and js and be ten times faster.<br>
 So in between my exams reading breaks i started hacking this "HangingRack" (probably bad name) which should have the same result as the mentioned site but would not use
 flash.<br>
 
@@ -490,7 +490,7 @@ After that we have our gameloop, which first updates the camera viewports(if rig
 
 
 Last but not least we need to start all these when page loads.<br>
-We instatiate our GameSetup object and define the play function which  starts the game loop ( loop because it calls itself).If you wonder about requestAnimFrame(instead of setTinterval), it is the new way to create animations, suported i think from al browsers  check the web for more info.
+We instatiate our GameSetup object and define the play function which  starts the game loop ( loop because it calls itself).If you wonder about requestAnimFrame(instead of setTinterval), it is the best way to create animations, suported i think from al browsers  check the web for more info.
 
 
 
