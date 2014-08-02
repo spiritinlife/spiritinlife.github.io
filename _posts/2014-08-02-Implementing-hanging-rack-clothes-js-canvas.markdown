@@ -28,10 +28,9 @@ For the impatient here is   <a href="http://spiritinlife.github.io/hidden_articl
 So we start with the html.
 
 Html is simple i just created a simple page with a canvas tag and script link in the body.
-{% highlight html %}	
-		"<canvas id="HangingRackCanvas" width=2000 height=600></canvas>"
-
-		"<script type="text/javascript" src="xCamera.js"></script>"
+{% highlight javascript  %}	
+		<canvas id="HangingRackCanvas" width=2000 height=600></canvas>
+		<script type="text/javascript" src="xCamera.js"></script>
 
 {% endhighlight %}
 
@@ -55,7 +54,7 @@ HangingRack.STEP = HangingRack.INTERVAL/1000; // seconds
 
 After that i define my controls which are keyboards left/right to move on the x-axis
 
-{% highlight javascript %}
+{% highlight javascript linenos=table%}
 HangingRack.controls = {
   left:false,
   right:false
