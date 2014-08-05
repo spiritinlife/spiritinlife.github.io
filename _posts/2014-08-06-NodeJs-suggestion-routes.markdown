@@ -59,7 +59,7 @@ module.exports = function(app){
 			app.get( controller.url , controller.handler );
 	});
 };
-{% endhighlight%}
+{% endhighlight %}
 
 
 It also prints out which route goes to which handler from which file.And i find this is usefull just because you now instantly know your routes.
