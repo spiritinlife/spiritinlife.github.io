@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "A suggestion for organizing your files in nodeJs express project"
+title:  "A suggestion for organizing your routes in nodeJs express project"
 date:   2014-08-06 19:28:57
 categories: NodeJs
 ---
