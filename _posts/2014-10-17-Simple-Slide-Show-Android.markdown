@@ -27,7 +27,9 @@ Right now the project looks like a sample for picasso with a custom view but i p
 
 
 How-To<br>
-
+First of all you need picasso in your project <br>
+   -> you can get picasso here <a href="https://github.com/square/picasso">picasso</a><br>
+Then :<br>
 1) Add it in your layout 
 
 {% highlight java %}
