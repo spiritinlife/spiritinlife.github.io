@@ -21,15 +21,16 @@ Well first of all i wanted something simpler and something that they did not off
 So here is my implementation on github <a href="https://github.com/spiritinlife/EasySlideShow4Android">EasySlideShow4Android</a>.
 <a href="http://tinypic.com?ref=15zfm8j" target="_blank"><img src="http://i61.tinypic.com/15zfm8j.png" border="0" alt="Image and video hosting by TinyPic"></a>
 
+<br><br>
 Right now the project looks like a sample for picasso with a custom view but i plan to make it more generic ,specially for animations .
 
 
 
-
-How-To
+How-To<br>
 
 1) Add it in your layout 
-```java
+
+{% highlight java %}
     <gr.spiritinlife.EasySlideShow.SlideShowView
         android:id="@+id/slideShow"
         android:layout_width="match_parent"
@@ -37,24 +38,28 @@ How-To
         android:layout_height="170dp"
         android:layout_marginBottom="7dp"
         android:minHeight="200dp"/>
-```
+{% endhighlight %}
+
         
 2) Get it from code
-```java
+
+{% highlight java %}
     slideShow = (SlideShowView) view.findViewById(R.id.slideShow);
-```
+{% endhighlight %}
+
 
 3) Start  it passing it an array of urls
-```java
+
+{% highlight java %}
     slideShow.start(urls);
-```
+{% endhighlight %}
 
 
-To-Do 
-1) Add examples 
-2) Add a generic way to make animation between imageview trasnistion and remove the current one which depeneds on canvas 
-3) Give a public function for changing the MAX_IMAGES which is now 3 ( it can be changed by code if you like ) 
-4) Make it possible to add custom colors on dots without changing the library. 
+To-Do <br>
+1) Add examples <br>
+2) Add a generic way to make animation between imageview trasnistion and remove the current one which depeneds on canvas <br>
+3) Give a public function for changing the MAX_IMAGES which is now 3 ( it can be changed by code if you like )<br> 
+4) Make it possible to add custom colors on dots without changing the library. <br>
 
 
 
