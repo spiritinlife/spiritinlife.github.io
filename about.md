@@ -8,8 +8,9 @@ I am an Android Developer and a junior backend developer with node and ruby.
 
 <h3>Contact:</h3>
 Gmail: george.chailazopoulos@gmail.com <br>
-Facebook: George Hailazopoulos<br>
+<a href="https://github.com/spiritinlife">Github</a><br>
 <a href="https://twitter.com/_spiritinlife">Twitter</a><br>
+<a href="https://www.facebook.com/george.hailazopoulos">Facebook</a><br>
 
 
 Projects <br>
