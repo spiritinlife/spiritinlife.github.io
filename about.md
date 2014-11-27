@@ -16,13 +16,13 @@ Gmail: george.chailazopoulos@gmail.com <br>
 Projects <br>
 
 
-<a href="http://frink.gr">
+<a href="http://frink.gr" style="text-align: center;">
 Frink
 <img src="../images/frink.png" width="200" height="150">
 </a>
 
 
-<a href="http://techatbricks.com">
+<a href="http://techatbricks.com" style="text-align: center;">
 TechatBricks
 <img src="../images/tech_at_bricks_logo.png" width="150" height="150">
 </a>
