@@ -87,7 +87,7 @@ So now that we know how to generate checksum lets connect with retrofit.<br>
 
 Well there is no easy way because in no point in the retrofit's "lifecycle" you get access to the body.<br>
 So what i did ?<br>
-I found out from a github post about this problem a way https://github.com/square/retrofit/issues/429 .Unfortunetly they do not give any code , so for me the problem was not solved yet , for you.. well you are lucky you ended up here.<br>
+I found  a way , from a github <a href="https://github.com/square/retrofit/issues/429">post</a> about this problem   .Unfortunetly they do not give any code , so for me the problem was not solved yet , for you.. well you are lucky you ended up here.<br>
 
 In retrofit when you build ur adapter you can set your own client<br>.
 As i understand clients configure the message that u send .<br>
