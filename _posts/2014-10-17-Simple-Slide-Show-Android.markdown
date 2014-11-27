@@ -7,17 +7,17 @@ categories: Android,java
 
 Finally today i had the time to code something fun and usefull !
 
-So in my uber secret project :) i need to have a slide show that downloads the images given some urls.
-I need it to display some dots indicating which image is now shown and i need it to handle gestures( right to left and left to right) as a default mechanism for changing images.
+So in my uber secret project :) i need to have a slide show that downloads the images given some urls.<br>
+I need it to display some dots indicating which image is now shown and i need it to handle <b>gestures</b>( right to left and left to right) as a default mechanism for changing images.
 
-So that must be fun!
+So that must be <b>fun!</b><br>
 
 Well at first i checked out a super awesome project by these guys marvinlabs/android-slideshow-widget , which is one of the most wonderfully written libraries for android in my opinion.The way they abstract things and api is just pro !!.You should check it out if you need to make your slide show dance :)
 
-Anyway my implementation was inspired by those guys.
-SO why did i not go with the library that i praise above ?
+Anyway my implementation was inspired by those guys.<br>
+<b>SO why did i not go with the library that i praise above ?</b><br>
 Well first of all i wanted something simpler and something that they did not offer which is the gesture control ( They are doing something with clicks but who clicks to change images nowadays :/ ). 
-
+<br>
 So here is my implementation on github <a href="https://github.com/spiritinlife/EasySlideShow4Android">EasySlideShow4Android</a>.
 <a href="http://tinypic.com?ref=15zfm8j" target="_blank"><img src="http://i61.tinypic.com/15zfm8j.png" border="0" alt="Image and video hosting by TinyPic"></a>
 
@@ -27,7 +27,9 @@ Right now the project looks like a sample for picasso with a custom view but i p
 
 
 How-To<br>
-
+First of all you need picasso in your project <br>
+   -> you can get picasso here <a href="https://github.com/square/picasso">picasso</a><br>
+Then :<br>
 1) Add it in your layout 
 
 {% highlight java %}
