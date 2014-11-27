@@ -3,8 +3,18 @@ layout: page
 title: About
 ---
 
-I am George Chailazopoulos 21 years old.
-I am an Android Developer and a junior backend developer with node and ruby.
+I am George Chailazopoulos.<br>
+I am 21 years old.<br>
+I am studying Computer Science.<br>
+I am an Android Developer.<br>
+I am a junior backend developer with node.<br>
+I am a junior AngularJs one page apps dev.<br>
+I am a microcontrollers/arduino/robotics freak.<br>
+I am a IOT freak.<br>
+I am a ... ......<br>
+I am a ... ......<br>
+I am a ... ......<br>
+I am a ... ......<br>
 
 <h3>Contact:</h3>
 Gmail: george.chailazopoulos@gmail.com <br>
