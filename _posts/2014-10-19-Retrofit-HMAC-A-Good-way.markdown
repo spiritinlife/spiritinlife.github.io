@@ -87,7 +87,7 @@ So now that we know how to generate checksum lets connect with retrofit.<br>
 
 Well there is no easy way because in no point in the retrofit's "lifecycle" you get access to the body.<br>
 So what i did ?<br>
-I found  a way , from a github <a href="https://github.com/square/retrofit/issues/429">post</a> about this problem   .Unfortunetly they do not give any code , so for me the problem was not solved yet , for you.. well you are lucky you ended up here.<br>
+I found  a way , from a github <a href="https://github.com/square/retrofit/issues/429">post</a> about this problem .Unfortunetly they do not give any code , so for me the problem was not solved yet , for you.. well you are lucky you ended up here.<br>
 
 In retrofit when you build ur adapter you can set your own client<br>.
 As i understand clients configure the message that u send .<br>
@@ -315,7 +315,7 @@ public class SigningClient implements Client {
 So i hope you are still with me <br>
 
 There are two things to notice <br>
-First in the snippet below how  the client handles messages with body and message without.<br>
+First in the snippet below notice how  the client handles messages with body and message without.<br>
 
 {% highlight java %}
 static HttpUriRequest createRequest(Request request) {
@@ -330,7 +330,7 @@ static HttpUriRequest createRequest(Request request) {
 
 
 <br>
-So we call create a class called GenericEntityHttpRequest<br>
+So we  create a class called GenericEntityHttpRequest<br>
 If you check this class (or snippet below) you will find my code that generates the checksum and ads the header x-api-secret
 <br>
 {% highlight java %}
@@ -374,11 +374,13 @@ All you have to do is say <br>
 
 {% highlight java %}
 adapter = new RestAdapter.Builder()
-        .setClient(new SigningClient())    // <--  this where you say retrofit to use our class 
+        .setClient(new SigningClient())    // <--  this is where you say retrofit to use our class 
         .setEndpoint(SERVER)
         .build();
 {% endhighlight %}
 
+
+Code in gists <a href="https://gist.github.com/spiritinlife/6bd8e2bcad6576dcf65c">HERE</a>
 
 That is all to it folks, hope i helped anyone out there <br>
 Comment if you have any suggestions or questions or you want to say something else :) <br>
