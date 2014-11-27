@@ -8,7 +8,7 @@ categories: Android
 
 It has been a long since my last post , but i am back and i think with something good :) <br>
 
-<h2>This post is about Android , Retrofit , HMAC.<h2> <br>
+<h2>This post is about Android , Retrofit , HMAC.</h2> <br>
 
 Two problems solved<br>
 1) Retrofit does not support HMAC , out of the box <br>
