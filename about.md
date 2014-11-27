@@ -15,13 +15,13 @@ Facebook: George Hailazopoulos<br>
 Projects <br>
 
 
-<a href="www.frink.gr">
+<a href="http://frink.gr">
 Frink
-<img src="../images/frink.png" width="250" height="150">
+<img src="../images/frink.png" width="200" height="150">
 </a>
 
 
-<a href="www.techatbricks.com">
+<a href="http://techatbricks.com">
 TechatBricks
 <img src="../images/tech_at_bricks_logo.png" width="150" height="150">
 </a>
