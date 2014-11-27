@@ -73,10 +73,12 @@ public class HMAC {
 {% endhighlight %}
 
 <br>
-So if you go through the code you will see this 
+So if you go through the code you will see this <br>
+{% highlight java %}
 // Base64.NO_WRAP   Encoder flag bit to omit all line terminators (i.e., the output will be on one long line).<br> 
 // If we do not use Base64.NO_WRAP the string will not be correct<br>
 digest = Base64.encodeToString(mac.doFinal(msg.getBytes("UTF-8")), Base64.NO_WRAP); <br>
+{% endhighlight %}
 
 The comment is self explanatory but i think it will save people's time.
 
