@@ -26,15 +26,40 @@ Gmail: george.chailazopoulos@gmail.com <br>
 Projects <br>
 
 
+<div>
+
+<div style="overflow:auto;">
 <a href="http://frink.gr" style="text-align: center;">
 Frink
 <img src="../images/frink.png" width="200" height="150">
 </a>
+</div>
 
-
+<div style="float:right;">
 <a href="http://techatbricks.com" style="text-align: center;">
 TechatBricks
 <img src="../images/tech_at_bricks_logo.png" width="150" height="150">
 </a>
+</div>
+</div>
 
 
+
+<br>Organizations<br>
+
+<div>
+<div style="overflow:auto;">
+<a href="http://techatbricks.com" style="text-align: center;">
+Appsterdam
+<img src="../images/appsterdam.png" width="150" height="150">
+</a>
+</div>
+
+<div style="float:right;">
+<a href="http://techatbricks.com" style="text-align: center;">
+Appsterdam
+<img src="../images/appsterdam.png" width="150" height="150">
+</a>
+</div>
+
+</div>
