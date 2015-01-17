@@ -23,11 +23,11 @@ Gmail: george.chailazopoulos@gmail.com <br>
 <a href="https://www.facebook.com/george.hailazopoulos">Facebook</a><br>
 
 
+
+
+
+<div style="display:block;clear:both;">
 <br><h2>Projects<h2><br>
-
-
-<div style="display:block">
-
 <div style="float:left;display:inline-block;">
 <a href="http://frink.gr" style="text-align: center;">
 Frink
@@ -45,9 +45,10 @@ TechatBricks
 
 
 
-<br><h2>Organizations</h2><br>
 
-<div>
+
+<div style="display:block;clear:both;">
+<br><h2>Organizations</h2><br>
 <div style="float:left;display:inline-block;">
 <a href="http://techatbricks.com" style="text-align: center;">
 Appsterdam
