@@ -27,16 +27,16 @@ Gmail: george.chailazopoulos@gmail.com <br>
 
 
 <div style="display:block;clear:both;">
-<h2 style="  margin-left: auto ;  margin-right: auto ;">Projects</h2><br>
+<h2 style="  margin-left: auto ;  margin-right: auto; text-align:center;">Projects</h2><br>
 <div style="float:left;display:inline-block;">
-<a href="http://frink.gr" style="text-align: center;">
+<a href="http://www.frink.gr/" style="text-align: center;">
 Frink
 <img src="../images/frink.png" width="200" height="150">
 </a>
 </div>
 
 <div style="float:right;display:inline-block;">
-<a href="http://techatbricks.com" style="text-align: center;">
+<a href="http://techatbricks.com/" style="text-align: center;">
 TechatBricks
 <img src="../images/tech_at_bricks_logo.png" width="200" height="150">
 </a>
@@ -48,16 +48,16 @@ TechatBricks
 
 
 <div style="display:block;clear:both;">
-<h2 style="  margin-left: auto ;  margin-right: auto ;">Organizations</h2><br>
+<h2 style="  margin-left: auto ;  margin-right: auto ;  text-align:center;">Organizations</h2><br>
 <div style="float:left;display:inline-block;">
-<a href="http://techatbricks.com" style="text-align: center;">
+<a href="http://greece.appsterdam.rs/" style="text-align: center;">
 Appsterdam
 <img src="../images/appsterdam.png" width="200" height="150">
 </a>
 </div>
 
 <div style="float:right;display:inline-block;">
-<a href="http://techatbricks.com" style="text-align: center;">
+<a href="https://www.facebook.com/StoneSoupGr/" style="text-align: center;">
 StoneSoup
 <img src="../images/stonesoup.png" width="200" height="150">
 </a>
