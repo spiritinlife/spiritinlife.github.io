@@ -23,11 +23,11 @@ Gmail: george.chailazopoulos@gmail.com <br>
 <a href="https://www.facebook.com/george.hailazopoulos">Facebook</a><br>
 
 
-
+<br>
 
 
 <div style="display:block;clear:both;">
-<br><h2>Projects<h2><br>
+<h2 style="  margin-left: auto ;  margin-right: auto ;">Projects</h2><br>
 <div style="float:left;display:inline-block;">
 <a href="http://frink.gr" style="text-align: center;">
 Frink
@@ -38,7 +38,7 @@ Frink
 <div style="float:right;display:inline-block;">
 <a href="http://techatbricks.com" style="text-align: center;">
 TechatBricks
-<img src="../images/tech_at_bricks_logo.png" width="150" height="150">
+<img src="../images/tech_at_bricks_logo.png" width="200" height="150">
 </a>
 </div>
 </div>
@@ -48,18 +48,18 @@ TechatBricks
 
 
 <div style="display:block;clear:both;">
-<br><h2>Organizations</h2><br>
+<h2 style="  margin-left: auto ;  margin-right: auto ;">Organizations</h2><br>
 <div style="float:left;display:inline-block;">
 <a href="http://techatbricks.com" style="text-align: center;">
 Appsterdam
-<img src="../images/appsterdam.png" width="150" height="150">
+<img src="../images/appsterdam.png" width="200" height="150">
 </a>
 </div>
 
 <div style="float:right;display:inline-block;">
 <a href="http://techatbricks.com" style="text-align: center;">
 StoneSoup
-<img src="../images/stonesoup.png" width="150" height="150">
+<img src="../images/stonesoup.png" width="200" height="150">
 </a>
 </div>
 
