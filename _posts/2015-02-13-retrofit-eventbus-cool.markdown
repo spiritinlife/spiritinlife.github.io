@@ -17,23 +17,23 @@ Otto just like Eventbus are actually a bus that delivers messages throughout you
 The hard core history is important way , this was done by using the android Handler.<br>
 Activities and Fragments register and broadcast intents with messages as extras and in that way messages get passed.<br>
 This way is error prone and has a lot of boilercode.<br>
-Otto and EventBus came in and did the heavy  work, so we can write now less code and get the job done :)<br>
+Otto and EventBus came in and did the heavy  work, so we can now write less code and get the job done :)<br>
 ----------------------------------------------------------<br>
 
-As every developer , i also did my research on how to make my api calls not crash my app when a phone call happens or on orientation change or whatever.<br>
+As every developer , i also , did my research on how to make my api calls not crash my app when a phone call happens or orientation changes or whatever.<br>
 Ofcourse retrofit was the best solution for me . It is clean, fast and dry.<br>
-But after a lot of research i encountered some problems with retrofit , that people told me about but i did not believe .<br>
+But after a lot of research i encountered some problems with retrofit , that people have warned me about .<br>
 Retrofit does not guarantee that if something happens with the api call( and many things can happen with an api call ) that your app will not crash.<br>
 There are a lot of debates about how to protect your app, some say use services , some say use otto , i say lets use eventbus.<br>
 
-So why eventbus and not otto?<br>
-First eventbus is way faster because it does not rely on annotations<br>
-Second eventbus allows more control and configuration.<br>
+<h1> So why eventbus and not otto?</h1><br>
+1) eventbus is way faster because it does not rely on annotations<br>
+2) eventbus allows more control and configuration.<br>
 
 <h1> So lets get real </h1><br>
 What is my goal here ?
-My goal was to write retrofit calls in way that is secure and beautifull.<br>
-And when i say beautifull i mean like plain retrofit.<br>
+My goal was to write retrofit calls in way that is secure and beautiful.<br>
+And when i say beautiful i mean like plain retrofit.<br>
 So how can i take this call<br>
 {% highlight java %}
 API.getApi().doAPiCall( new Callback() {
@@ -47,8 +47,9 @@ API.getApi().doAPiCall( new Callback() {
 {% endhighlight %}
 
 and not change it at all but make it secure ?<br>
-Well i did it but it is up to you to check it out and tell me how wrong i may be ( which in this case i may be :) )
-So in my way i would write this
+Well i did it but it is up to you to check it out and tell me how wrong i may be ( which in this case i may be :) )<br>
+So the result of my work is the code bellow.<br>
+I can write now secure api calls with what seems to be vanilla retrofit.
 
 {% highlight java %}
 API.getApi().doAPiCall( new BusNetCallback<Response>() {
@@ -61,7 +62,7 @@ API.getApi().doAPiCall( new BusNetCallback<Response>() {
 {% endhighlight %}
 
 So how did i do that ?<br>
-As you see the only thing i changes is that i changed Callback to BusNetCallback and rename success and failure.<br>
+As you see the only thing that changed is the Callback to BusNetCallback and rename success and failure.<br>
 And i say to you that this is a secure way and as you see mostly nothing has changed from the retrofit way.<br>
 
 <h1>SO Lets see what i did to achieve this</h1><br>
@@ -165,15 +166,15 @@ public abstract class BusNetCallback<T> implements Callback<T> {
 So i think the code is pretty well commented and understandable.<br>
 I declare two onEvent methods that are the api calls subscribers <br>
 and when the api call returns it posts an event to the corresponding event handler.<br>
-Them the event handler calls the method that holds your code .This method could be either the<br> 
+Then the event handler calls the method that holds your code .This method could be either the<br> 
 apiSuccess or the apiFailure which you implement as you saw above.<br>
 
-Some notes this code is not heavilly tested  and i beleive many things could go wrong, but it is the<br>
-cleanest solution so far and for that reason i am pretty proud for it.<br>
-I really hope you like it and use it in your projects but must of all i hope you criticize it and make it better.<br>
 
 <h3>Important</h3><br>
-I believe that this code can become a lot better and i hope you can give your expertize .<br>
+This code is not heavilly tested  and i beleive many things could go wrong, but it is the<br>
+cleanest solution so far and for that reason i am pretty proud of it.<br>
+I really hope you like it and use it in your projects but must of all i hope you criticize it and make it better.<br>
+I believe that this code can become a lot better and i hope you can give your expertise .<br>
 So do not hesitate, write me a comment.
 
 
