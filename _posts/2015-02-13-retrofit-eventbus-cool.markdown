@@ -8,7 +8,7 @@ categories: Android,Retrofit,Eventbus
 Hello again from the android wonderland.<br>
 The following post is about Retrofit combined with Eventbus.<br>
 If you have ever used Retrofit , i am sure you know about the problems with securing it.<br>
-If not take a look here http://www.mdswanson.com/blog/2014/02/24/integration-testing-rest-apis-for-android.html.<br>
+If not take a look here <a href="http://www.mdswanson.com/blog/2014/04/07/durable-android-rest-clients.html">http://www.mdswanson.com/blog/2014/04/07/durable-android-rest-clients.html</a>.<br>
 If you are bored to read it , it explains a way to secure your api calls without defensive programming ( error checking , nulls etc).<br>
 It does that by combing otto and retrofit.<br>
 
