@@ -5,20 +5,20 @@ date:   2015-02-13 6:40:00
 categories: Android,Retrofit,Eventbus
 ---
 
-Hello again from the android wonderland.
+Hello again from the android wonderland.\n
 The following post is about Retrofit combined with Eventbus.
 If you have ever used Retrofit , i am sure you know about the problems with securing it.
 If not take a look here http://www.mdswanson.com/blog/2014/02/24/integration-testing-rest-apis-for-android.html.
 If you are bored to read it , it explains a way to secure your api calls without defensive programming ( error checking , nulls etc).
 It does that by combing otto and retrofit.
 
--------------------For the Begginers----------------------
+-------------------For the Begginers----------------------\n
 Otto just like Eventbus are actually a bus that delivers messages throughout your application.
 The hard core history is important way , this was done by using the android Handler.
 Activities and Fragments register and broadcast intents with messages as extras and in that way messages get passed.
 This way is error prone and has a lot of boilercode.
 Otto and EventBus came in and did the heavy  work, so we can write now less code and get the job done :)
-----------------------------------------------------------
+----------------------------------------------------------\n
 
 As every developer , i also did my research on how to make my api calls not crash my app when a phone call happens or on orientation change or whatever.
 Ofcourse retrofit was the best solution for me . It is clean, fast and dry.
@@ -26,11 +26,11 @@ But after a lot of research i encountered some problems with retrofit , that peo
 Retrofit does not guarantee that if something happens with the api call( and many things can happen with an api call ) that your app will not crash.
 There are a lot of debates about how to protect your app, some say use services , some say use otto , i say lets use eventbus.
 
-So why eventbus and not otto?
+So why eventbus and not otto?\n
 First eventbus is way faster because it does not rely on annotations
 Second eventbus allows more control and configuration.
 
-<h1> So lets get real </h1>
+<h1> So lets get real </h1>\n
 What is my goal here ?
 My goal was to write retrofit calls in way that is secure and beautifull.
 And when i say beautifull i mean like plain retrofit .
@@ -60,11 +60,11 @@ API.getApi().doAPiCall( new BusNetCallback<Response>() {
   });
 {% endhighlight %}
 
-So how did i do that ? 
+So how did i do that ?\n 
 As you see the only thing i changes is that i changed Callback to BusNetCallback and rename success and failure.
 And i say to you that this is a secure way and as you see mostly nothing has changed from the retrofit way.
 
-<h1>SO Lets see what i did to achieve this</h1>
+<h1>SO Lets see what i did to achieve this</h1>\n
 All i did is extend the Callback class in way that by default uses the eventbus to pass all api calls through the bus.
 In that way we can rest assure that if something goes wrong it will not go wrong in our main thread.
 So i will just through some code  and i will try to explain after.
@@ -170,10 +170,9 @@ apiSuccess or the apiFailure which you implement as you saw above.
 
 Some notes this code is not heavilly tested  and i beleive many things could go wrong, but it is the
 cleanest solution so far and for that reason i am pretty proud for it.
-
 I really hope you like it and use it in your projects but must of all i hope you criticize it and make it better.
 
-<h3>Important</h3>
+<h3>Important</h3>\n
 I believe that this code can become a lot better and i hope you can give your expertize .
 So do not hesitate write me a comment.
 
