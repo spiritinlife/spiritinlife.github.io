@@ -5,8 +5,7 @@ date:   2015-02-13 6:40:00
 categories: Android,Retrofit,Eventbus
 ---
 
-## Updated ( 25 April 2015 ) to add sticky events in order to handle orientation changes as discussed in comments
-##### Thanks to Yannick
+
 
 Hello again from the android wonderland.<br>
 The following post is about Retrofit combined with Eventbus.<br>
@@ -185,3 +184,7 @@ cleanest solution so far and for that reason i am pretty proud of it.<br>
 I really hope you like it and use it in your projects but must of all i hope you criticize it and make it better.<br>
 I believe that this code can become a lot better and i hope you can give your expertise .<br>
 So do not hesitate, write me a comment.
+
+##Updates
+** Updated ( 25 April 2015 ) to add sticky events in order to handle orientation changes as discussed in comments
+***** Thanks to Yannick
