@@ -5,6 +5,9 @@ date:   2015-02-13 6:40:00
 categories: Android,Retrofit,Eventbus
 ---
 
+## Updated ( 25 April 2015 ) to add sticky events in order to handle orientation changes as discussed in comments
+##### Thanks to Yannick
+
 Hello again from the android wonderland.<br>
 The following post is about Retrofit combined with Eventbus.<br>
 If you have ever used Retrofit , i am sure you know about the problems with securing it.<br>
@@ -104,7 +107,7 @@ public abstract class BusNetCallback<T> implements Callback<T> {
     {
 
         mBus = _bus;
-        mBus.register(this);
+        mBus.registerSticky(this);
     }
 
 
@@ -120,6 +123,9 @@ public abstract class BusNetCallback<T> implements Callback<T> {
      * @param obj
      */
     public void onEvent (T obj){
+        //remove the sticky event because we have already consumed it
+        mBus.removeStickyEvent(obj);
+
         onSuccess(obj);
         // And we unregister
         mBus.unregister(this);
@@ -131,6 +137,9 @@ public abstract class BusNetCallback<T> implements Callback<T> {
      * @param error
      */
     public void onEvent (RetrofitError error) {
+        //remove the sticky event because we have already consumed it
+        mBus.removeStickyEvent(error);
+
         onFailure(error);
         // And we unregister
         mBus.unregister(this);
@@ -146,9 +155,9 @@ public abstract class BusNetCallback<T> implements Callback<T> {
          */
 
         // Here we send the event
-        mBus.post(obj);
+        mBus.postSticky(obj);
     }
-	
+
 	/** execute common functionality for handling error from a api call */
 	@Override
 	final public void failure(RetrofitError error) {
@@ -157,7 +166,7 @@ public abstract class BusNetCallback<T> implements Callback<T> {
          */
 
         // Here we send the event
-        mBus.post(error);
+        mBus.postSticky(error);
 	}
 
 }
@@ -166,7 +175,7 @@ public abstract class BusNetCallback<T> implements Callback<T> {
 So i think the code is pretty well commented and understandable.<br>
 I declare two onEvent methods that are the api calls subscribers <br>
 and when the api call returns it posts an event to the corresponding event handler.<br>
-Then the event handler calls the method that holds your code .This method could be either the<br> 
+Then the event handler calls the method that holds your code .This method could be either the<br>
 apiSuccess or the apiFailure which you implement as you saw above.<br>
 
 
@@ -176,6 +185,3 @@ cleanest solution so far and for that reason i am pretty proud of it.<br>
 I really hope you like it and use it in your projects but must of all i hope you criticize it and make it better.<br>
 I believe that this code can become a lot better and i hope you can give your expertise .<br>
 So do not hesitate, write me a comment.
-
-
-
