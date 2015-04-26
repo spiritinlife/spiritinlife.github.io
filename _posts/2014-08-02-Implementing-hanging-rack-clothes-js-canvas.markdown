@@ -42,7 +42,7 @@ Html is simple i just created a simple page with a canvas tag and script link in
 
 		<header>
 		</header>
-		
+
 		<canvas id="HangingRackCanvas" width=2000 height=600></canvas>
 
 		<script type="text/javascript" src="xCamera.js"></script>
@@ -66,7 +66,7 @@ First lets define some global variables.
 //Define global variable
 window.HangingRack = {};
 
-// game loop settings: 
+// game loop settings:
 HangingRack.FPS = 30;
 HangingRack.INTERVAL = 1000/HangingRack.FPS; // milliseconds
 HangingRack.STEP = HangingRack.INTERVAL/1000; // seconds
@@ -77,8 +77,10 @@ After that i define my controls which are keyboards left/right to move on the x-
 {% highlight javascript %}
 HangingRack.controls = {
   left:false,
-  right:false
+  right:false,
+  autoPlay:false
 }
+
 
 window.addEventListener("keydown", function(e){
   switch(e.keyCode)
@@ -101,6 +103,9 @@ window.addEventListener("keyup", function(e){
     case 39: // right arrow
       HangingRack.controls.right = false;
       break;
+		case 65: // KEY CODE for letter a
+			HangingRack.controls.autoPlay = !HangingRack.controls.autoPlay;
+			break;
   }
 }, false);
 
@@ -110,6 +115,7 @@ window.addEventListener("keyup", function(e){
 
 
 This code just says that when you press left arrow set the HangingRack.controls.left to true and when you release set it to false (the same for right arrow)
+**Update added an autoplay mode by pressing a ( only brings tshirts from right to left it does not ping pong )
 
 After that i define a function which handles the game loop .There are numerous articles on the web saying that you should use this requestAnimFrame and not plain old setInterval.
 
@@ -124,7 +130,7 @@ window.requestAnimFrame = (function(){
 })();
 {% endhighlight %}
 
--Extra tip: Watch out for javascript's fricking semicolon insertion 
+-Extra tip: Watch out for javascript's fricking semicolon insertion
 
 
 Ok now we need to define some helpful stuff.
@@ -205,7 +211,7 @@ We also define one function :
 
 
   //xCamera constructor
-  //xView is the position of the camera on x 
+  //xView is the position of the camera on x
   //yView is the position of the camera on y
   //vWidth is the viewport width
   //vHeight is the viewport height
@@ -235,43 +241,44 @@ We also define one function :
   }
 
 
-  xCamera.prototype.updateViewport = function() {
+	xCamera.prototype.updateViewport = function() {
 
-    if (HangingRack.controls.left === true){
-      //Update the position of Camera 
-      //Left means that we need to see more to the  right so we add
-      this.xView += this.cameraSpeed * HangingRack.STEP;
-    }
-
-
-    if (HangingRack.controls.right === true){
-      //Update the position of Camera
-      //Right means that we need to see more to the left so we subtract
-      this.xView -= this.cameraSpeed * HangingRack.STEP;
-
-    }
-
-
-
-
-    if (HangingRack.controls.touch > 0)
+    if (HangingRack.controls.autoPlay === true)
     {
-      this.xView -= HangingRack.controls.touch  * HangingRack.STEP;
-      HangingRack.controls.touch -= 1;
-      if (HangingRack.controls.touch < 0 ){
-        HangingRack.controls.touch = 0;
+      this.xView += this.cameraSpeed/2 * HangingRack.STEP;
+    }
+    else
+    {
+      if (HangingRack.controls.left === true){
+        //Update the position of Camera
+        this.xView += this.cameraSpeed * HangingRack.STEP;
       }
-    }
 
-    if (HangingRack.controls.touch < 0)
-    {
-      this.xView -= HangingRack.controls.touch  * HangingRack.STEP;
-      HangingRack.controls.touch += 1;
-      if (HangingRack.controls.touch > 0 ){
+
+      if (HangingRack.controls.right === true){
+        //Update the position of Camera
+        this.xView -= this.cameraSpeed * HangingRack.STEP;
+
+      }
+
+      if (HangingRack.controls.touch > 0)
+      {
+        this.xView -= HangingRack.controls.touch  * HangingRack.STEP;
+        HangingRack.controls.touch -= 1;
+        if (HangingRack.controls.touch < 0 ){
           HangingRack.controls.touch = 0;
         }
-    }
+      }
 
+      if (HangingRack.controls.touch < 0)
+      {
+        this.xView -= HangingRack.controls.touch  * HangingRack.STEP;
+        HangingRack.controls.touch += 1;
+        if (HangingRack.controls.touch > 0 ){
+            HangingRack.controls.touch = 0;
+          }
+      }
+    }
     //set the new position of the camera
     this.viewport.set(this.xView,this.yView);
 
@@ -280,11 +287,12 @@ We also define one function :
     {
       if(this.viewport.left < this.world.left)
         this.xView = this.world.left;
-      
+
       if(this.viewport.right > this.world.right)
         this.xView = this.world.right - this.viewportWidth;
     }
   }
+
 
    HangingRack.xCamera = xCamera;
 })();
@@ -296,13 +304,17 @@ We also define one function :
 
 
 
+**Update make tshirts rotatble as Requested by a commenter ( Yannick Albert  ).
+**Thanks to a friend of mine that told me that in orthogrphic mode you emulate 3d **rotation as a scaling from -1 to 1 of the width of the image. This is kind of cool.
+**This is not properly explained with comments in code because i am lacking the time to **do it . Leave comments if you have any questions.
+
 Next we define our tshirt.
 It has its own world coords,width and height.
 It also has a hanger icon  (which is used to have a better visual effect).
 And a function which is called 'draw' , which gets the canvas context and draws the hanger and the tshirt in the viewports coords.
-Notice that i say viewports coords.That is because as we said tshirts have world coords but when we want to draw them(which means that they fall in the viewport's space) 
+Notice that i say viewports coords.That is because as we said tshirts have world coords but when we want to draw them(which means that they fall in the viewport's space)
 we need to think where they belong and since we only move camera on the x-axis we only need to do this on the x-axis.
-So what we say is , that the tshirt's initial drawing x-position is the position that it has in the world minus its width/2(because we want half of the tshirt left of x-position 
+So what we say is , that the tshirt's initial drawing x-position is the position that it has in the world minus its width/2(because we want half of the tshirt left of x-position
 and half of it to the right) minus camera.xView.
 This is  (this.xWorldPos-this.hangerWidth/2) - camera.xView.
 We need this because lets say a shirt has x-cord of 200 in the world and the camera has x-cord of 20 in the world and the camera's width is 400(Which means shirt is in vieport's space),then if we did not do this the shirt would be drawn on the
@@ -333,11 +345,33 @@ We need this because lets say a shirt has x-cord of 200 in the world and the cam
 
   Tshirt.prototype.draw = function(context,camera){
     //if the shirts world position is within the camera viewport then it should be drawn
-    if(this.imageLoaded && this.xWorldPos - this.width <= camera.xView + camera.viewportWidth && this.xWorldPos + this.width >= camera.xView){ 
-      
-      //convert world x-cords to camera viewports x-cords      
-      context.drawImage(this.hanger,(this.xWorldPos-this.hangerWidth/2) - camera.xView, this.yWorldPos,this.hangerWidth,this.hangerHeight);
-      context.drawImage(this.image,(this.xWorldPos-this.width/2) - camera.xView, this.yWorldPos+51,this.width,this.height);
+    if(this.imageLoaded && this.xWorldPos - this.width <= camera.xView + camera.viewportWidth && this.xWorldPos + this.width >= camera.xView){
+
+			//convert world x-cords to camera viewports x-cords
+      //drawImage(image,sourceX,sourceY,sourceWidth,sourceHeight,destWidth,destHeight)
+      //we use above drawimage to create a scaling effect which in orthographic view seems like 3d rotation kind of
+      //+ we draw the hanging thingy in slice mode to make it rotatable
+      context.drawImage(this.hanger,0,0,this.hangerWidth,this.hangerHeight*this.hangerSlice,
+                        (this.xWorldPos-this.hangerDestWidth/2) - camera.xView,
+                        this.yWorldPos,this.hangerDestWidth,this.hangerDestHeight*this.hangerSlice);
+
+
+
+      context.drawImage(this.hanger,0,this.hangerHeight*this.hangerSlice,this.hangerWidth,this.hangerHeight*(1-this.hangerSlice),
+                        (this.xWorldPos-(this.rotateAnglesAnim * this.hangerDestWidth/2)) - camera.xView,
+                        this.yWorldPos+(this.hangerDestHeight*this.hangerSlice),
+                        this.rotateAnglesAnim*this.hangerDestWidth,this.hangerDestHeight*(1-this.hangerSlice));
+
+
+
+      context.drawImage(this.image,(this.xWorldPos- (this.rotateAnglesAnim * this.width/2)) - camera.xView, this.yWorldPos+52,this.rotateAnglesAnim*this.width,this.height);
+
+      //update rotation
+      this.rotateAnglesAnim = ( this.rotateAnglesAnim + (this.rotateDirection * 0.01) )%1.0;
+      if (this.rotateAnglesAnim >= 0.90 && this.rotateDirection == 1)
+        this.rotateDirection = -1;
+      else if ( this.rotateAnglesAnim <= -0.90 && this.rotateDirection == -1)
+        this.rotateDirection = 1;
     }
   }
 
@@ -348,6 +382,7 @@ We need this because lets say a shirt has x-cord of 200 in the world and the cam
 
 
 {% endhighlight %}
+
 
 
 After that we define the code that glues all these together.
@@ -369,7 +404,7 @@ It also defines some functions that handle the touch events inside the canvas ( 
     this.height = height;
     this.Tshirts = [];
     this.HangerSpotY = 10;
-    this.emptyHangerSpot = 1; 
+    this.emptyHangerSpot = 1;
     this.hangerSpotWidth = 300;
     this.canvas = document.getElementById("HangingRackCanvas");
 
@@ -397,21 +432,21 @@ It also defines some functions that handle the touch events inside the canvas ( 
   HangingRackWorld.prototype.touchStart = function(e){
       this.touch_x = e.changedTouches[0].clientX;
       this.dist_touch_x = 0;
-    
+
   }
-  
+
   HangingRackWorld.prototype.touchEnd = function(e){
-      var end_touch = e.changedTouches[0].clientX; 
+      var end_touch = e.changedTouches[0].clientX;
       HangingRack.controls.touch = end_touch - this.touch_x;
       if ( HangingRack.controls.touch > 150  ){
         HangingRack.controls.touch = 150;
       }
-      
+
       if ( HangingRack.controls.touch < -150  ){
         HangingRack.controls.touch = -150;
-      }     
+      }
   }
-  
+
   HangingRackWorld.prototype.touchX = function(e){
     this.dist_touch_x += this.touch_x - e.changedTouches[0].clientX;
   }
@@ -449,30 +484,30 @@ After that we have our gameloop, which first updates the camera viewports(if rig
 
 (function(){
   // prepaire our game canvas
-    
+
   function GameSetup(){
-   
+
     this.canvas = document.getElementById("HangingRackCanvas");
     this.context = this.canvas.getContext("2d");
-  
+
     this.hangingRack = new HangingRack.HangingRackWorld(6000,500);
     this.camera = new HangingRack.xCamera(this.canvas.width, this.canvas.height, 6000,500,1350,0);
-  
+
   }
 
 
   GameSetup.prototype.renderScene = function(){
         // clear the entire canvas
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        
+
         // redraw all objects
-        this.hangingRack.draw(this.context, this.camera);   
+        this.hangingRack.draw(this.context, this.camera);
       }
-  
+
   GameSetup.prototype.updateScene = function(){
       this.camera.updateViewport();
     }
-  
+
   GameSetup.prototype.gameLoop = function(){
       this.updateScene();
       this.renderScene();
@@ -481,7 +516,7 @@ After that we have our gameloop, which first updates the camera viewports(if rig
 
 
   HangingRack.GameSetup = GameSetup;
-      
+
 
 })();
 
@@ -490,14 +525,14 @@ After that we have our gameloop, which first updates the camera viewports(if rig
 
 
 Last but not least we need to start all these when page loads.<br>
-We instatiate our GameSetup object and define the play function which  starts the game loop ( loop because it calls itself).If you wonder about requestAnimFrame(instead of setTinterval), it is the best way to create animations, suported i think from all browsers  check the web for more info.
+We instatiate our GameSetup object and define the play function which  starts the game loop ( loop because it calls itself).If you wonder about requestAnimFrame(instead of setTinterval), it is the best way to create animations, supported i think from all browsers  check the web for more info.
 
 
 
 {% highlight javascript %}
 
 //start the game when page is loaded
-window.onload = function(){ 
+window.onload = function(){
 
   var gameSetup = new HangingRack.GameSetup();
   function play(){
@@ -511,3 +546,7 @@ window.onload = function(){
 
 
 That is all folks!!
+
+
+**Updates ( 26 April ) add autoplay and make tshirts rotable
+**As requested from Yannick Albert

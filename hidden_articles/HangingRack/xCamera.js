@@ -3,7 +3,7 @@
 //Define global variable
 window.HangingRack = {};
 
-// game loop settings: 
+// game loop settings:
 HangingRack.FPS = 30;
 HangingRack.INTERVAL = 1000/HangingRack.FPS; // milliseconds
 HangingRack.STEP = HangingRack.INTERVAL/1000; // seconds
@@ -38,7 +38,6 @@ window.addEventListener("keyup", function(e){
     case 65: // KEY CODE for letter a
       HangingRack.controls.autoPlay = !HangingRack.controls.autoPlay;
       break;
-      
   }
 }, false);
 
@@ -97,7 +96,7 @@ window.requestAnimFrame = (function(){
 
 
   //xCamera constructor
-  //xView is the position of the camera on x 
+  //xView is the position of the camera on x
   //yView is the position of the camera on y
   //vWidth is the viewport width
   //vHeight is the viewport height
@@ -176,7 +175,7 @@ window.requestAnimFrame = (function(){
     {
       if(this.viewport.left < this.world.left)
         this.xView = this.world.left;
-      
+
       if(this.viewport.right > this.world.right)
         this.xView = this.world.right - this.viewportWidth;
     }
@@ -215,38 +214,35 @@ window.requestAnimFrame = (function(){
 
   Tshirt.prototype.draw = function(context,camera){
     //if the shirts world position is within the camera viewport then it should be drawn
-    if(this.imageLoaded && this.xWorldPos - this.width <= camera.xView + camera.viewportWidth && this.xWorldPos + this.width >= camera.xView){ 
-      
+    if(this.imageLoaded && this.xWorldPos - this.width <= camera.xView + camera.viewportWidth && this.xWorldPos + this.width >= camera.xView){
 
-      //convert world x-cords to camera viewports x-cords      
+
+      //convert world x-cords to camera viewports x-cords
+      //drawImage(image,sourceX,sourceY,sourceWidth,sourceHeight,destWidth,destHeight)
+      //we use above drawimage to create a scaling effect which in orthographic view seems like 3d rotation kind of
+      //+ we draw the hanging thingy in slice mode to make it rotatable
       context.drawImage(this.hanger,0,0,this.hangerWidth,this.hangerHeight*this.hangerSlice,
                         (this.xWorldPos-this.hangerDestWidth/2) - camera.xView,
                         this.yWorldPos,this.hangerDestWidth,this.hangerDestHeight*this.hangerSlice);
-      
-      
-      
+
+
+
       context.drawImage(this.hanger,0,this.hangerHeight*this.hangerSlice,this.hangerWidth,this.hangerHeight*(1-this.hangerSlice),
                         (this.xWorldPos-(this.rotateAnglesAnim * this.hangerDestWidth/2)) - camera.xView,
                         this.yWorldPos+(this.hangerDestHeight*this.hangerSlice),
                         this.rotateAnglesAnim*this.hangerDestWidth,this.hangerDestHeight*(1-this.hangerSlice));
-      
-     
 
-      context.save();
-      
-   //   context.translate(this.width/2 + this.rotateAnglesAnim*this.width/2,0);
-      
+
+
       context.drawImage(this.image,(this.xWorldPos- (this.rotateAnglesAnim * this.width/2)) - camera.xView, this.yWorldPos+52,this.rotateAnglesAnim*this.width,this.height);
-      
 
+      //update rotation
       this.rotateAnglesAnim = ( this.rotateAnglesAnim + (this.rotateDirection * 0.01) )%1.0;
       if (this.rotateAnglesAnim >= 0.90 && this.rotateDirection == 1)
         this.rotateDirection = -1;
       else if ( this.rotateAnglesAnim <= -0.90 && this.rotateDirection == -1)
         this.rotateDirection = 1;
- 
-      context.restore();
-    }
+     }
   }
 
   HangingRack.Tshirt = Tshirt;
@@ -260,7 +256,7 @@ window.requestAnimFrame = (function(){
     this.height = height;
     this.Tshirts = [];
     this.HangerSpotY = 10;
-    this.emptyHangerSpot = 1; 
+    this.emptyHangerSpot = 1;
     this.hangerSpotWidth = 300;
     this.canvas = document.getElementById("HangingRackCanvas");
 
@@ -282,28 +278,28 @@ window.requestAnimFrame = (function(){
       this.emptyHangerSpot += 1
     };
 
-    
+
   }
 
 
   HangingRackWorld.prototype.touchStart = function(e){
       this.touch_x = e.changedTouches[0].clientX;
       this.dist_touch_x = 0;
-    
+
   }
-  
+
   HangingRackWorld.prototype.touchEnd = function(e){
-      var end_touch = e.changedTouches[0].clientX; 
+      var end_touch = e.changedTouches[0].clientX;
       HangingRack.controls.touch = end_touch - this.touch_x;
       if ( HangingRack.controls.touch > 150  ){
         HangingRack.controls.touch = 150;
       }
-      
+
       if ( HangingRack.controls.touch < -150  ){
         HangingRack.controls.touch = -150;
-      }     
+      }
   }
-  
+
   HangingRackWorld.prototype.touchX = function(e){
     this.dist_touch_x += this.touch_x - e.changedTouches[0].clientX;
   }
@@ -331,12 +327,12 @@ window.requestAnimFrame = (function(){
 
 (function(){
   // prepaire our game canvas
-    
+
   function GameSetup(){
-   
+
     this.canvas = document.getElementById("HangingRackCanvas");
     this.context = this.canvas.getContext("2d");
-  
+
     this.hangingRack = new HangingRack.HangingRackWorld(5000,500);
    //creates the camera,1350 is where the camera's x-cord is in te world
     this.camera = new HangingRack.xCamera(this.canvas.width, this.canvas.height, this.width,this.height,1350,0);
@@ -347,15 +343,15 @@ window.requestAnimFrame = (function(){
   GameSetup.prototype.renderScene = function(){
         // clear the entire canvas
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        
+
         // redraw all objects
-        this.hangingRack.draw(this.context, this.camera);   
+        this.hangingRack.draw(this.context, this.camera);
       }
-  
+
   GameSetup.prototype.updateScene = function(){
       this.camera.updateViewport();
     }
-  
+
   GameSetup.prototype.gameLoop = function(){
       this.updateScene();
       this.renderScene();
@@ -364,7 +360,7 @@ window.requestAnimFrame = (function(){
 
 
   HangingRack.GameSetup = GameSetup;
-      
+
 
 })();
 
@@ -376,7 +372,7 @@ window.requestAnimFrame = (function(){
 
 
 //start the game when page is loaded
-window.onload = function(){ 
+window.onload = function(){
   //var canvas = document.getElementById("HangingRackCanvas");
   //canvas.height = 500;
   //canvas.width = window.innerWidth;
@@ -384,16 +380,7 @@ window.onload = function(){
   var gameSetup = new HangingRack.GameSetup();
   function play(){
     requestAnimFrame(play);
-    gameSetup.gameLoop();  
+    gameSetup.gameLoop();
   }
   requestAnimFrame(play);
 }
-
-
-
-
-
-
-
-
-
