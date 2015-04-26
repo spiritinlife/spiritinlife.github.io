@@ -10,7 +10,8 @@ HangingRack.STEP = HangingRack.INTERVAL/1000; // seconds
 
 HangingRack.controls = {
   left:false,
-  right:false
+  right:false,
+  autoPlay:false
 }
 
 window.addEventListener("keydown", function(e){
@@ -34,6 +35,10 @@ window.addEventListener("keyup", function(e){
     case 39: // right arrow
       HangingRack.controls.right = false;
       break;
+    case 65: // KEY CODE for letter a
+      HangingRack.controls.autoPlay = !HangingRack.controls.autoPlay;
+      break;
+      
   }
 }, false);
 
@@ -124,39 +129,45 @@ window.requestAnimFrame = (function(){
 
   xCamera.prototype.updateViewport = function() {
 
-    if (HangingRack.controls.left === true){
-      //Update the position of Camera
-      this.xView += this.cameraSpeed * HangingRack.STEP;
-    }
-
-
-    if (HangingRack.controls.right === true){
-      //Update the position of Camera
-      this.xView -= this.cameraSpeed * HangingRack.STEP;
-
-    }
-
-
-
-
-    if (HangingRack.controls.touch > 0)
+    if (HangingRack.controls.autoPlay === true)
     {
-      this.xView -= HangingRack.controls.touch  * HangingRack.STEP;
-      HangingRack.controls.touch -= 1;
-      if (HangingRack.controls.touch < 0 ){
-        HangingRack.controls.touch = 0;
+      this.xView += this.cameraSpeed/2 * HangingRack.STEP;
+    }
+    else
+    {
+      if (HangingRack.controls.left === true){
+        //Update the position of Camera
+        this.xView += this.cameraSpeed * HangingRack.STEP;
       }
-    }
 
-    if (HangingRack.controls.touch < 0)
-    {
-      this.xView -= HangingRack.controls.touch  * HangingRack.STEP;
-      HangingRack.controls.touch += 1;
-      if (HangingRack.controls.touch > 0 ){
+
+      if (HangingRack.controls.right === true){
+        //Update the position of Camera
+        this.xView -= this.cameraSpeed * HangingRack.STEP;
+
+      }
+
+
+
+
+      if (HangingRack.controls.touch > 0)
+      {
+        this.xView -= HangingRack.controls.touch  * HangingRack.STEP;
+        HangingRack.controls.touch -= 1;
+        if (HangingRack.controls.touch < 0 ){
           HangingRack.controls.touch = 0;
         }
-    }
+      }
 
+      if (HangingRack.controls.touch < 0)
+      {
+        this.xView -= HangingRack.controls.touch  * HangingRack.STEP;
+        HangingRack.controls.touch += 1;
+        if (HangingRack.controls.touch > 0 ){
+            HangingRack.controls.touch = 0;
+          }
+      }
+    }
     //set the new position of the camera
     this.viewport.set(this.xView,this.yView);
 
@@ -181,8 +192,10 @@ window.requestAnimFrame = (function(){
     this.yWorldPos = y;
     this.width = 270;
     this.height = 320;
-    this.hangerWidth = 55;
-    this.hangerHeight = 55;
+    this.hangerWidth = 97;
+    this.hangerHeight = 117;
+    this.hangerDestWidth = 55;
+    this.hangerDestHeight = 55;
     this.hanger = new Image()
     this.hanger.src = "hanger.png"
     this.image = new Image();
@@ -192,6 +205,10 @@ window.requestAnimFrame = (function(){
     this.image.onload = function() {
         self.imageLoaded = true;
     };
+    this.to_radians = Math.PI/180;
+    this.rotateAnglesAnim = 0.0;
+    this.rotateDirection = 1;
+    this.hangerSlice = 0.60;
 
   }
 
@@ -200,9 +217,35 @@ window.requestAnimFrame = (function(){
     //if the shirts world position is within the camera viewport then it should be drawn
     if(this.imageLoaded && this.xWorldPos - this.width <= camera.xView + camera.viewportWidth && this.xWorldPos + this.width >= camera.xView){ 
       
+
       //convert world x-cords to camera viewports x-cords      
-      context.drawImage(this.hanger,(this.xWorldPos-this.hangerWidth/2) - camera.xView, this.yWorldPos,this.hangerWidth,this.hangerHeight);
-      context.drawImage(this.image,(this.xWorldPos-this.width/2) - camera.xView, this.yWorldPos+51,this.width,this.height);
+      context.drawImage(this.hanger,0,0,this.hangerWidth,this.hangerHeight*this.hangerSlice,
+                        (this.xWorldPos-this.hangerDestWidth/2) - camera.xView,
+                        this.yWorldPos,this.hangerDestWidth,this.hangerDestHeight*this.hangerSlice);
+      
+      
+      
+      context.drawImage(this.hanger,0,this.hangerHeight*this.hangerSlice,this.hangerWidth,this.hangerHeight*(1-this.hangerSlice),
+                        (this.xWorldPos-(this.rotateAnglesAnim * this.hangerDestWidth/2)) - camera.xView,
+                        this.yWorldPos+(this.hangerDestHeight*this.hangerSlice),
+                        this.rotateAnglesAnim*this.hangerDestWidth,this.hangerDestHeight*(1-this.hangerSlice));
+      
+     
+
+      context.save();
+      
+   //   context.translate(this.width/2 + this.rotateAnglesAnim*this.width/2,0);
+      
+      context.drawImage(this.image,(this.xWorldPos- (this.rotateAnglesAnim * this.width/2)) - camera.xView, this.yWorldPos+52,this.rotateAnglesAnim*this.width,this.height);
+      
+
+      this.rotateAnglesAnim = ( this.rotateAnglesAnim + (this.rotateDirection * 0.01) )%1.0;
+      if (this.rotateAnglesAnim >= 0.90 && this.rotateDirection == 1)
+        this.rotateDirection = -1;
+      else if ( this.rotateAnglesAnim <= -0.90 && this.rotateDirection == -1)
+        this.rotateDirection = 1;
+ 
+      context.restore();
     }
   }
 
