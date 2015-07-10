@@ -5,7 +5,8 @@ date:   2015-02-13 6:40:00
 categories: Android,Retrofit,Eventbus
 ---
 
-
+### Important
+The implementation listed below has some serious problems. Continue reading if you want to contribute to it :)
 
 Hello again from the android wonderland.<br>
 The following post is about Retrofit combined with Eventbus.<br>
