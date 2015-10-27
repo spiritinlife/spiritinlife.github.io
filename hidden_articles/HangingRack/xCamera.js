@@ -189,6 +189,7 @@ window.requestAnimFrame = (function(){
   function Tshirt(x,y,imageSrc){
     this.xWorldPos = x;
     this.yWorldPos = y;
+    this.prevXWorldPos = x;
     this.width = 270;
     this.height = 320;
     this.hangerWidth = 97;
